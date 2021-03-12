@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.example.create_keyboard1.util.KeyboardView
+        android:id="@+id/keyboardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/Gray"
+        android:padding="5dp"
+        app:keyBackground="@drawable/pop_up_background"
+        app:keyPreviewLayout="@layout/preview"
+        app:keyTextColor="#fff"
+        app:keyTextSize="16sp"
+        app:labelTextSize="14sp" />
+</LinearLayout>

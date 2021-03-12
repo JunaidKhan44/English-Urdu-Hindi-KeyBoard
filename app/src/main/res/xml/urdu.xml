@@ -1,0 +1,77 @@
+<Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:keyWidth="10%p"
+    app:horizontalGap="0px"
+    app:verticalGap="0px"
+    app:keyHeight="50dp"
+    >
+
+
+    <Row>
+        <Key app:codes="207" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24"  app:keyWidth="18%p" />
+        <Key app:codes="206" app:keyIcon="@drawable/ic_baseline_insert_emoticon_24" app:keyWidth="16%p"/>
+        <Key app:codes="55" app:keyIcon="@drawable/ic_baseline_mic_24" app:keyWidth="16%p" />
+        <Key app:codes="56" app:keyIcon="@drawable/ic_baseline_sticky_note_2_24" app:keyWidth="16%p"/>
+        <Key app:codes="57" app:keyIcon="@drawable/ic_baseline_color_lens_24" app:keyWidth="16%p"/>
+        <Key app:codes="48" app:keyIcon="@drawable/ic_baseline_settings_24" app:keyEdgeFlags="right" app:keyWidth="18%p"/>
+    </Row>
+
+    <Row>
+        <Key app:codes="0x0635" app:keyLabel="ص" app:keyEdgeFlags="left"/>
+        <Key app:codes="0x0636" app:keyLabel="ض"/>
+        <Key app:codes="0x063A" app:keyLabel="غ"/>
+        <Key app:codes="0x0691" app:keyLabel="ڑ"/>
+        <Key app:codes="0x0679" app:keyLabel="ٹ"/>
+        <Key app:codes="0x062B" app:keyLabel="ث"/>
+        <Key app:codes="0x062D" app:keyLabel="ح"/>
+        <Key app:codes="0x0626" app:keyLabel="ئ"/>
+        <Key app:codes="0x0638" app:keyLabel="ظ"/>
+        <Key app:codes="0x0637" app:keyLabel="ط" app:keyEdgeFlags="right"/>
+    </Row>
+
+    <Row>
+        <Key app:codes="0x0642" app:keyLabel="ق" app:keyEdgeFlags="left"/>
+        <Key app:codes="0x0648" app:keyLabel="و"/>
+        <Key app:codes="0x0639" app:keyLabel="ع"/>
+        <Key app:codes="0x0631" app:keyLabel="ر"/>
+        <Key app:codes="0x062A" app:keyLabel="ت"/>
+        <Key app:codes="0x06D2" app:keyLabel="ے"/>
+        <Key app:codes="0x0621" app:keyLabel="ء"/>
+        <Key app:codes="0x0649" app:keyLabel="ى"/>
+        <Key app:codes="0x06D5" app:keyLabel="ە"/>
+        <Key app:codes="0x067E" app:keyLabel="پ" app:keyEdgeFlags="right"/>
+    </Row>
+
+    <Row>
+        <Key app:codes="0x0644" app:keyLabel="ل" app:keyEdgeFlags="left"/>
+        <Key app:codes="0x06A9" app:keyLabel="ک"/>
+        <Key app:codes="0x062C" app:keyLabel="ج"/>
+        <Key app:codes="0x0647" app:keyLabel="ه"/>
+        <Key app:codes="0x06AF" app:keyLabel="گ"/>
+        <Key app:codes="0x0641" app:keyLabel="ف"/>
+        <Key app:codes="0x0631" app:keyLabel="ر"/>
+        <Key app:codes="0x0688" app:keyLabel="ڈ"/>
+        <Key app:codes="0x0633" app:keyLabel="س"/>
+        <Key app:codes="0x0627" app:keyLabel="ا" app:keyEdgeFlags="right"/>
+    </Row>
+    <Row>
+        <Key app:codes="0x0630" app:keyLabel="ذ"  app:keyWidth="09%p" app:keyEdgeFlags="left"/>
+        <Key app:codes="0x0632" app:keyLabel="ز"  app:keyWidth="09%p"/>
+        <Key app:codes="0x0634" app:keyLabel="ش"  app:keyWidth="09%p"/>
+        <Key app:codes="0x062E" app:keyLabel="خ"  app:keyWidth="09%p"/>
+        <Key app:codes="0x0696" app:keyLabel="چ"  app:keyWidth="09%p"/>
+        <Key app:codes="0x0628" app:keyLabel="ب"  app:keyWidth="09%p"/>
+        <Key app:codes="0x06BA" app:keyLabel="ں"  app:keyWidth="09%p" />
+        <Key app:codes="0x0646" app:keyLabel="ن"  app:keyWidth="09%p"/>
+        <Key app:codes="0x0645" app:keyLabel="م"  app:keyWidth="09%p"/>
+        <Key app:codes="-5" app:keyLabel="⌫" app:keyWidth="19%p" app:isRepeatable="true"/>
+    </Row>
+    <Row app:rowEdgeFlags="bottom">
+        <Key app:codes="0xFE70" app:keyLabel="١٢٣؟" app:keyWidth="20%p"  app:keyEdgeFlags="left"/>
+        <Key app:codes="0x060C" app:keyLabel="،" app:keyWidth="10%p" />
+        <Key app:codes="0x2666" app:keyLabel="🌐" app:keyWidth="10%p" app:isRepeatable="true"  />
+        <Key app:codes="32" app:keyLabel="اردو" app:keyWidth="40%p" app:isRepeatable="true"/>
+        <Key app:codes="0x2936" app:keyLabel="-" app:keyWidth="10%p" app:keyEdgeFlags="right"/>
+        <Key app:codes="-4" app:keyLabel="⏎" app:keyWidth="20%p" app:keyEdgeFlags="right"/>
+    </Row>
+</Keyboard>

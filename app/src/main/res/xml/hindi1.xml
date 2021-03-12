@@ -1,0 +1,84 @@
+<Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:keyWidth="10%p"
+    app:horizontalGap="0px"
+    app:verticalGap="0px"
+    app:keyHeight="50dp"
+
+    >
+    <!--1-->
+    <Row>
+        <Key app:codes="0x0900" app:keyLabel="ऄ" app:keyEdgeFlags="left"/>
+        <Key app:codes="0x0905" app:keyLabel="अ"/>
+        <Key app:codes="0x0906" app:keyLabel="आ"/>
+        <Key app:codes="0x0907" app:keyLabel="इ"/>
+        <Key app:codes="0x0908" app:keyLabel="ई"/>
+        <Key app:codes="0x0909" app:keyLabel="उ"/>
+        <Key app:codes="0x090A" app:keyLabel="ऊ"/>
+        <Key app:codes="0x090B" app:keyLabel="ऋ"/>
+        <Key app:codes="0x090C" app:keyLabel="ऌ"/>
+        <Key app:codes="0x090D" app:keyLabel="ऍ" app:keyEdgeFlags="right"/>
+    </Row>
+    <!--2-->
+    <Row>
+        <Key app:codes="0x090E" app:keyLabel="ऎ" app:keyEdgeFlags="left"/>
+        <Key app:codes="0x090F" app:keyLabel="ए"/>
+        <Key app:codes="0x0910" app:keyLabel="ऐ"/>
+        <Key app:codes="0x0911" app:keyLabel="ऑ"/>
+        <Key app:codes="0x0912" app:keyLabel="ऒ"/>
+        <Key app:codes="0x0913" app:keyLabel="ओ"/>
+        <Key app:codes="0x0914" app:keyLabel="औ"/>
+        <Key app:codes="0x0915" app:keyLabel="क"/>
+        <Key app:codes="0x0916" app:keyLabel="ख"/>
+        <Key app:codes="0x0917" app:keyLabel="ग" app:keyEdgeFlags="right"/>
+    </Row>
+    <!--3-->
+    <Row>
+        <Key app:codes="0x0918" app:keyLabel="घ" app:keyEdgeFlags="left"/>
+        <Key app:codes="0x0919" app:keyLabel="ङ"/>
+        <Key app:codes="0x091A" app:keyLabel="च"/>
+        <Key app:codes="0x091B" app:keyLabel="छ"/>
+        <Key app:codes="0x091C" app:keyLabel="ज"/>
+        <Key app:codes="0x091D" app:keyLabel="झ"/>
+        <Key app:codes="0x091E" app:keyLabel="ञ"/>
+        <Key app:codes="0x091F" app:keyLabel="ट"/>
+        <Key app:codes="0x0920" app:keyLabel="ठ"/>
+        <Key app:codes="0x0921" app:keyLabel="ड" app:keyEdgeFlags="right"/>
+    </Row>
+    <!--4-->
+    <Row>
+        <Key app:codes="0x0922" app:keyLabel="ढ"   app:keyEdgeFlags="left"/>
+        <Key app:codes="0x0923" app:keyLabel="ण"  />
+        <Key app:codes="0x0924" app:keyLabel="त"  />
+        <Key app:codes="0x0925" app:keyLabel="थ"  />
+        <Key app:codes="0x0926" app:keyLabel="द"  />
+        <Key app:codes="0x0927" app:keyLabel="ध"  />
+        <Key app:codes="0x0928" app:keyLabel="न"  />
+        <Key app:codes="0x0929" app:keyLabel="ऩ"  />
+        <Key app:codes="0x092A" app:keyLabel="प"  />
+        <Key app:codes="0x092B" app:keyLabel="फ"     app:isRepeatable="true"/>
+    </Row>
+    <!--5-->
+    <Row>
+        <Key app:codes="0xFF9B" app:keyLabel="1/3"  app:keyWidth="14%p" app:keyEdgeFlags="left"/>
+        <Key app:codes="0x092C" app:keyLabel="ब"   app:keyWidth="8%p" />
+        <Key app:codes="0x092D" app:keyLabel="भ"   app:keyWidth="8%p" />
+        <Key app:codes="0x092E" app:keyLabel="म"   app:keyWidth="8%p" />
+        <Key app:codes="0x092F" app:keyLabel="य"   app:keyWidth="8%p" />
+        <Key app:codes="0x0930" app:keyLabel="र"   app:keyWidth="8%p" />
+        <Key app:codes="0x0931" app:keyLabel="ऱ"   app:keyWidth="8%p" />
+        <Key app:codes="0x0932" app:keyLabel="ल"   app:keyWidth="8%p" />
+        <Key app:codes="0x0933" app:keyLabel="ळ"   app:keyWidth="8%p" />
+        <Key app:codes="0x0934" app:keyLabel="ऴ"   app:keyWidth="8%p" />
+        <Key app:codes="-5" app:keyLabel="⌫"      app:keyWidth="14%p" app:isRepeatable="true"/>
+    </Row>
+
+    <Row app:rowEdgeFlags="bottom">
+        <Key app:codes="0x061F,49,50,51" app:keyLabel="123؟" app:keyWidth="20%p"  app:keyEdgeFlags="left"/>
+        <Key app:codes="0x060C" app:keyLabel="،" app:keyWidth="10%p" />
+        <Key app:codes="0x2752" app:keyLabel="🌎" app:keyWidth="10%p" app:isRepeatable="true"  />
+        <Key app:codes="32" app:keyLabel="जगह" app:keyWidth="30%p" app:isRepeatable="true"/>
+        <Key app:codes="0x2936" app:keyLabel="-" app:keyWidth="10%p" app:keyEdgeFlags="right"/>
+        <Key app:codes="-4" app:keyLabel="⏎" app:keyWidth="20%p" app:keyEdgeFlags="right"/>
+    </Row>
+</Keyboard>

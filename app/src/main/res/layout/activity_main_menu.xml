@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainMenu"
+    android:background="@drawable/gradient_ui">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/Gray"
+        android:gravity="center"
+        android:id="@+id/header">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="English Urdu Keyboard"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_alternates"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:id="@+id/block">
+
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/Gray"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="10dp"
+            android:onClick="enablingKeyboard"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_baseline_settings_power_24"
+                    android:id="@+id/img1"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enable"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/img1"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/txt1"
+                    android:layout_marginTop="5dp"/>
+
+
+                <TextView
+                    android:layout_marginTop="-5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Keyboard"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/txt1"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/txt12"
+                    />
+
+            </RelativeLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="350dp"
+            android:layout_height="200dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@color/Gray"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:cardCornerRadius="10dp"
+            android:onClick="showbackground"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_baseline_keyboard_alt_24"
+                    android:id="@+id/img12"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Keyboard"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/img12"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/txt21"
+                    android:layout_marginTop="5dp"
+                    />
+
+
+                <TextView
+                    android:layout_marginTop="-5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Backgrounds"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_below="@+id/txt21"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/txt22"
+                    />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/block"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded"
+        android:id="@+id/theme"
+        >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:src="@drawable/ic_baseline_keyboard_24"
+          android:layout_marginLeft="40dp"
+          android:layout_weight="0.5"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Keyboard Themes"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1.5"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/theme"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded"
+        android:id="@+id/setkeyboard"
+        android:onClick="setkeyboarddialog"
+
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_settings2"
+            android:layout_marginLeft="40dp"
+            android:layout_weight="0.5"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Set Keyboard"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1.5"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/setkeyboard"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded"
+        android:id="@+id/disable"
+        android:onClick="disablekeyboard"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_baseline_do_not_disturb_24"
+            android:layout_marginLeft="40dp"
+            android:layout_weight="0.5"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Disable Keyboard"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_weight="1.5"/>
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>
