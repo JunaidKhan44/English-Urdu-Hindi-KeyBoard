@@ -1,9 +1,14 @@
-package com.example.create_keyboard1;
+package com.example.create_keyboard1.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.example.create_keyboard1.Fragments.FlagsFrag;
+import com.example.create_keyboard1.Fragments.GradientFrag;
+import com.example.create_keyboard1.Fragments.ImageFrag;
+import com.example.create_keyboard1.Fragments.SportsFrag;
 
 public class PageAdapter extends FragmentPagerAdapter {
 
@@ -27,11 +32,11 @@ public class PageAdapter extends FragmentPagerAdapter {
             case 0:
                 return new GradientFrag();
             case 1:
-                return new GradientFrag();
+                return new ImageFrag();
             case 2:
-                return new GradientFrag();
+                return new SportsFrag();
             case 3:
-                return new GradientFrag();
+                return new FlagsFrag();
             default:
                 return null;
         }

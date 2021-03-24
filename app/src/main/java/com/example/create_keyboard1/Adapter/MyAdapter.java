@@ -1,7 +1,13 @@
 package com.example.create_keyboard1.Adapter;
 
 import android.content.Context;
-import android.view.Display;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +21,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.create_keyboard1.Model.Model;
 import com.example.create_keyboard1.R;
-import com.example.create_keyboard1.SimpleIME;
+import com.example.create_keyboard1.Otherclasses.SimpleIME;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyHolder> {
 
     public Context context;
     ArrayList<Model>   arrayList;
+
+
+    public static final String SHARED_PREF_NAME = "myloginapp";
+    public static final String GROUPSNAME_SHARED_PREF = "groupname";
+    public static final String POSITION_AD="pos";
+
 
     public MyAdapter(Context context, ArrayList<Model> arrayList) {
         this.context = context;
@@ -45,8 +58,25 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyHolder> {
         holder.dapply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SimpleIME.kv.setBackgroundResource(arrayList.get(position).getTheme_image());
-                Toast.makeText(context, "Theme Applied..", Toast.LENGTH_SHORT).show();
+
+               // Bitmap bmp = BitmapFactory.decodeResource(context.getResources(),arrayList.get(position).getTheme_image());
+
+//                Drawable drawable = context.getResources().getDrawable(arrayList.get(position).getTheme_image());
+//                Bitmap bmp = ((BitmapDrawable)drawable).getBitmap();
+//
+//                SharedPreferences sharedPreferences1 = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPreferences1.edit();
+//                editor.putString(GROUPSNAME_SHARED_PREF, encodeTobase64(bmp));
+//                editor.commit();
+//                editor.apply();
+
+                SharedPreferences sharedPreferences1 = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences1.edit();
+                editor.putString(GROUPSNAME_SHARED_PREF, "gradient");
+                editor.putInt(POSITION_AD,position);
+                editor.commit();
+                editor.apply();
+                Toast.makeText(context,"Background Selected..", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -69,5 +99,17 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyHolder> {
             this.dapply = itemView.findViewById(R.id.download_btn);
         }
     }
+
+
+    public static String encodeTobase64(Bitmap image) {
+        Bitmap immage = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+        Log.d("Image Log:", imageEncoded);
+        return imageEncoded;
+    }
+
 
 }

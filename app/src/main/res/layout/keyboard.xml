@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<com.example.create_keyboard1.util.KeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.create_keyboard1.util.KeyboardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/keyboard"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    app:keyPreviewLayout="@layout/preview"
+    android:background="@drawable/gradient_1"
     app:keyBackground="@drawable/background"
-    android:background="@drawable/picart"
     app:keyPreviewHeight="50dp"
+    app:keyPreviewLayout="@layout/preview"
+    app:keyTextColor="@color/white"
     app:keyTextSize="18sp"
     app:labelTextSize="18sp"
     app:popupLayout="@layout/popupkeyboard"
-    app:keyTextColor="@color/white"
-    app:shadowRadius="1"
     app:shadowColor="#fff"
+    app:shadowRadius="1"
 
+    >
 
-
-
-    />
+</com.example.create_keyboard1.util.KeyboardView>

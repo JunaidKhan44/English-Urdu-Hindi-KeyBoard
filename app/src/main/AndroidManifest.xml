@@ -6,6 +6,10 @@
     <uses-permission
         android:name="android.permission.WRITE_SECURE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -14,19 +18,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Create_Keyboard1">
-        <activity android:name=".Background"></activity>
-        <activity android:name=".MainMenu" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".Otherclasses.SettingActivity"></activity>
+        <activity android:name=".Otherclasses.ExitScreen" />
+        <activity android:name=".Otherclasses.Speech" />
+        <activity android:name=".Otherclasses.Background" />
+        <activity android:name=".Otherclasses.MainMenu" />
+        <activity android:name=".Otherclasses.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ThemesActivity" />
+        <activity android:name=".Otherclasses.ThemesActivity" />
 
         <service
-            android:name=".SimpleIME"
+            android:name=".Otherclasses.SimpleIME"
             android:label="@string/simple_ime"
             android:permission="android.permission.BIND_INPUT_METHOD">
             <meta-data

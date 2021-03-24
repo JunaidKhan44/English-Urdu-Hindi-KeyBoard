@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Otherclasses.ExitScreen"
+    android:background="@color/Gray">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="2dp"
+            android:id="@+id/r1"
+            android:layout_above="@+id/center"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text="@string/text"
+                android:id="@+id/text"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:fontFamily="@font/montserrat_alternates"
+                android:gravity="center" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:backgroundTint="@color/white"
+                app:cardCornerRadius="20dp"
+                android:layout_below="@+id/text">
+
+                <LinearLayout
+                    android:id="@+id/native_ad_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
+
+                <TextView
+                    android:id="@+id/loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Ad is loading.."
+                    android:textColor="@color/black" />
+
+                <ProgressBar
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:outlineAmbientShadowColor="@color/Gray"
+                    android:id="@+id/prograssbar"/>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_above="@+id/bottom"
+            android:id="@+id/center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="rate us"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_alternates"
+                android:id="@+id/rateus"/>
+
+            <RatingBar
+                android:id="@+id/simpleRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/rateus"
+                android:progressBackgroundTint="@color/White"
+                android:background="@color/Gray"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:rating="0"
+                />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="2"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/bottom"
+            android:layout_marginBottom="15dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/white"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:text="Ok"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:id="@+id/yes"
+                android:onClick="exitFun"/>
+
+            <Button
+                android:id="@+id/no"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="40dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/white"
+                android:text="Cancel"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:onClick="retainFun"/>
+
+
+        </LinearLayout>
+
+</RelativeLayout>

@@ -1,76 +1,72 @@
 <Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     app:keyWidth="10%p"
-    app:horizontalGap="0px"
-    app:verticalGap="0px"
+    app:horizontalGap="2px"
+    app:verticalGap="4px"
     app:keyHeight="50dp"
     >
 
 
     <Row>
-        <Key app:codes="207" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24" app:keyWidth="16%p" app:keyEdgeFlags="left" />
-        <Key app:codes="32" app:keyLabel="😕"  />
-        <Key app:codes="42" app:keyLabel="⏱"/>
-        <Key app:codes="50" app:keyLabel="⛄"/>
-        <Key app:codes="51" app:keyLabel="🎆"/>
-        <Key app:codes="52" app:keyLabel="🏆"/>
-        <Key app:codes="0x1F423" app:keyLabel="🐣"/>
-        <Key app:codes="0x1F493" app:keyLabel="💓"/>
-        <Key app:codes="0x1F5FD" app:keyLabel="🗽"/>
-        <Key app:codes="-5" app:keyLabel="⌫" app:keyWidth="16%p" app:isRepeatable="true" app:keyEdgeFlags="right"/>
+        <Key app:codes="207" app:keyIcon="@drawable/ic_baseline_reply_24" app:keyWidth="15%p"  />
+        <Key app:codes="0x0730" app:keyLabel="⏱" app:keyWidth="15%p"/>
+        <Key app:codes="0x0731" app:keyLabel="😕"  app:keyWidth="15%p" />
+        <Key app:codes="0x0732" app:keyLabel="⛄" app:keyWidth="15%p"/>
+        <Key app:codes="0x0733" app:keyLabel="💓" app:keyWidth="15%p"/>
+        <Key app:codes="-5" app:keyIcon="@drawable/ic_backspace" app:keyWidth="25%p" app:isRepeatable="true" app:keyEdgeFlags="right"/>
     </Row>
 
     <Row>
-        <Key app:codes="0x23F1" app:keyLabel="⏱" app:keyEdgeFlags="left" />
-        <Key app:codes="0x231B" app:keyLabel="⌛"/>
-        <Key app:codes="0x23F0" app:keyLabel="⏰"/>
-        <Key app:codes="0x231A" app:keyLabel="⌚"/>
-        <Key app:codes="0x23F2" app:keyLabel="⏲"/>
-        <Key app:codes="0x1F567" app:keyLabel="🕧"/>
-        <Key app:codes="0x1F566" app:keyLabel="🕧"/>
-        <Key app:codes="0x1F554" app:keyLabel="🕦"/>
-        <Key app:codes="0x1F564" app:keyLabel="🕤"/>
-        <Key app:codes="0x23F3" app:keyLabel="⏳" app:keyEdgeFlags="right"/>
+        <Key app:codes="0x23F1" app:keyLabel="⏱" app:keyEdgeFlags="left" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x231B" app:keyLabel="⌛" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x23F0" app:keyLabel="⏰" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x231A" app:keyLabel="⌚" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x23F2" app:keyLabel="⏲" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F567" app:keyLabel="🕧" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F566" app:keyLabel="🕧" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F554" app:keyLabel="🕦" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F564" app:keyLabel="🕤" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x23F3" app:keyLabel="⏳" app:keyEdgeFlags="right" app:keyWidth="9.5%p"/>
     </Row>
     <Row>
-        <Key app:codes="0x1F565" app:keyLabel="🕥" app:keyEdgeFlags="left"/>
-        <Key app:codes="0x1F562" app:keyLabel="🕢"/>
-        <Key app:codes="0x1F563" app:keyLabel="🕢"/>
-        <Key app:codes="0x1F560" app:keyLabel="🕠"/>
-        <Key app:codes="0x1F561" app:keyLabel="🕡"/>
-        <Key app:codes="0x1F55E" app:keyLabel="🕡"/>
-        <Key app:codes="0x1F55F" app:keyLabel="🕟"/>
-        <Key app:codes="0x1F55C" app:keyLabel="🕟"/>
-        <Key app:codes="0x1F55D" app:keyLabel="🕜"/>
-        <Key app:codes="0x1F555" app:keyLabel="🕕" app:keyEdgeFlags="right"/>
+        <Key app:codes="0x1F565" app:keyLabel="🕥" app:keyEdgeFlags="left" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F562" app:keyLabel="🕢" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F563" app:keyLabel="🕢" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F560" app:keyLabel="🕠" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F561" app:keyLabel="🕡" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F55E" app:keyLabel="🕡" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F55F" app:keyLabel="🕟" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F55C" app:keyLabel="🕟" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F55D" app:keyLabel="🕜" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F555" app:keyLabel="🕕" app:keyEdgeFlags="right" app:keyWidth="9.5%p"/>
     </Row>
 
     <Row>
-        <Key app:codes="0x1F553" app:keyLabel="🕓" app:keyEdgeFlags="left"/>
-        <Key app:codes="0x1F55A" app:keyLabel="🕚" />
-        <Key app:codes="0x1F558" app:keyLabel="🕘"/>
-        <Key app:codes="0x1F559" app:keyLabel="🕙"/>
-        <Key app:codes="0x1F556" app:keyLabel="🕖"/>
-        <Key app:codes="0x1F557" app:keyLabel="🕗"/>
-        <Key app:codes="0x1F55B" app:keyLabel="🕛"/>
-        <Key app:codes="0x1F552" app:keyLabel="🕒"/>
-        <Key app:codes="0x1F551" app:keyLabel="🕒"/>
-        <Key app:codes="0x1F550" app:keyLabel="🕐" app:keyEdgeFlags="right"/>
+        <Key app:codes="0x1F553" app:keyLabel="🕓" app:keyEdgeFlags="left" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F55A" app:keyLabel="🕚" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F558" app:keyLabel="🕘" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F559" app:keyLabel="🕙" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F556" app:keyLabel="🕖" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F557" app:keyLabel="🕗" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F55B" app:keyLabel="🕛" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F552" app:keyLabel="🕒" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F551" app:keyLabel="🕒" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F550" app:keyLabel="🕐" app:keyEdgeFlags="right" app:keyWidth="9.5%p"/>
     </Row>
 
 
 
     <Row>
-        <Key app:codes="0x26A1" app:keyLabel="⚡" app:keyEdgeFlags="left"/>
-        <Key app:codes="0x1F525" app:keyLabel="🔥" />
-        <Key app:codes="0x1F30A" app:keyLabel="🌊"/>
-        <Key app:codes="0x1F311" app:keyLabel="🌑"/>
-        <Key app:codes="0x2B50" app:keyLabel="⭐"/>
-        <Key app:codes="0x1F302" app:keyLabel="🌂"/>
-        <Key app:codes="0x2602" app:keyLabel="☂"/>
-        <Key app:codes="0x2614" app:keyLabel="☔"/>
-        <Key app:codes="0x1F4A7" app:keyLabel="💧"/>
-        <Key app:codes="0x1F312" app:keyLabel="🌒" app:keyEdgeFlags="right"/>
+        <Key app:codes="0x26A1" app:keyLabel="⚡" app:keyEdgeFlags="left" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F525" app:keyLabel="🔥" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F30A" app:keyLabel="🌊" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F311" app:keyLabel="🌑" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x2B50" app:keyLabel="⭐" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F302" app:keyLabel="🌂" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x2602" app:keyLabel="☂" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x2614" app:keyLabel="☔" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F4A7" app:keyLabel="💧" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x1F312" app:keyLabel="🌒" app:keyEdgeFlags="right" app:keyWidth="9.5%p"/>
     </Row>
 
 </Keyboard>

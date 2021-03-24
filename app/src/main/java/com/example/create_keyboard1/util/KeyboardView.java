@@ -2,6 +2,7 @@ package com.example.create_keyboard1.util;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -25,6 +26,8 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.RequiresApi;
 
 import com.example.create_keyboard1.R;
@@ -34,6 +37,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.example.create_keyboard1.Otherclasses.SimpleIME.ic;
 
 /**
  * A view that renders a virtual {@link Keyboard}. It handles rendering of keys and
@@ -218,7 +223,7 @@ public class KeyboardView extends View implements View.OnClickListener {
     private int[] mDistances = new int[MAX_NEARBY_KEYS];
 
     //for drawing
-    int keyXAxis = 8;
+    int keyXAxis = 20;
     int keyYAxis = 15;
 
     // For multi-tap
@@ -662,245 +667,69 @@ public class KeyboardView extends View implements View.OnClickListener {
         paint.setTypeface(font);
 
         List<Keyboard.Key> keys = getKeyboard().getKeys();
-//        for (Keyboard.Key key : keys) {
-//            if (key.label != null) {
-//                switch (key.codes[0]) {
-//
-//                    //qQ
-//                    case 81:
-//                    case 113:
-//                        canvas.drawText("1 Ǭ ℚ",
-//                                key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 1602:
-//                        canvas.drawText("ا",
-//                                key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //wW
-//                    case 87:
-//                    case 119:
-//                    case 1572:
-//                        canvas.drawText("2 Ẃ ᙡ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 1608:
-//                        canvas.drawText("ٶ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //eE
-//                    case 69:
-//                    case 101:
-//                        canvas.drawText("3 ℯ ē", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 1593:
-//                        canvas.drawText("غ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //rR
-//                    case 82:
-//                    case 114:
-//                        canvas.drawText("4 ř ŕ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0631:
-//                        canvas.drawText("ڑ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //tT
-//                    case 84:
-//                    case 116:
-//                        canvas.drawText("5 ţ ť", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x062A:
-//                        canvas.drawText("ٹ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //yY
-//                    case 89:
-//                    case 121:
-//                        canvas.drawText("6 ɣ Ꮍ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x06D2:
-//                        canvas.drawText("ۓ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //uU
-//                    case 85:
-//                    case 117:
-//                        canvas.drawText("7 ừ ű", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0621:
-//                        canvas.drawText("ء", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //iI
-//                    case 73:
-//                    case 105:
-//                        canvas.drawText("8 ί ΐ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x06CC:
-//                        canvas.drawText("ئ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //oO
-//                    case 79:
-//                    case 111:
-//                        canvas.drawText("9 ό ø", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x06C1:
-//                        canvas.drawText("ۃ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //pP
-//                    case 80:
-//                    case 112:
-//                        canvas.drawText("0 ҏ Ꭾ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x067E:
-//                        canvas.drawText("ث", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //aA
-//                    case 65:
-//                    case 97:
-//                        canvas.drawText("à @", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0627:
-//                        canvas.drawText("آ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //sS
-//                    case 83:
-//                    case 115:
-//                        canvas.drawText("ŝ #", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0633:
-//                        canvas.drawText("ص", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //dD
-//                    case 68:
-//                    case 100:
-//                        canvas.drawText("₫ &", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x062F:
-//                        canvas.drawText("ڈ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //fF
-//                    case 70:
-//                    case 102:
-//                        canvas.drawText("ᶂ *", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0641:
-//                        canvas.drawText("\"", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //gG
-//                    case 71:
-//                    case 103:
-//                        canvas.drawText("ġ -", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x06AF:
-//                        canvas.drawText("'", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //hH
-//                    case 72:
-//                    case 104:
-//                        canvas.drawText("Ꮵ +", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x06BE:
-//                        canvas.drawText("ح", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //jJ
-//                    case 74:
-//                    case 106:
-//                        canvas.drawText("ɉ =", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x062C:
-//                        canvas.drawText("خ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //kK
-//                    case 75:
-//                    case 107:
-//                        canvas.drawText("ķ (", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x06A9:
-//                        canvas.drawText("ض", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //lL
-//                    case 76:
-//                    case 108:
-//                        canvas.drawText("ŀ )", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0644:
-//                        canvas.drawText("@", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //zZ
-//                    case 90:
-//                    case 122:
-//                        canvas.drawText("Ẑ _", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0632:
-//                        canvas.drawText("ذ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //
-//
-//                    case 46:
-//                        canvas.drawText("َ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //xX
-//                    case 88:
-//                    case 120:
-//                        canvas.drawText("ჯ $", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0634:
-//                        canvas.drawText("ژ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //cC
-//                    case 67:
-//                    case 99:
-//                        canvas.drawText("¢ \"", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0686:
-//                        canvas.drawText("(", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //vV
-//                    case 86:
-//                    case 118:
-//                        canvas.drawText("Ꮙ '", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0637:
-//                        canvas.drawText("ظ", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //bB
-//                    case 66:
-//                    case 98:
-//                        canvas.drawText("ხ :", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0628:
-//                        canvas.drawText("ث", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                    //nN
-//                    case 78:
-//                    case 110:
-//                        canvas.drawText("ή ;", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0646:
-//                        canvas.drawText("ں", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    //mM
-//                    case 77:
-//                    case 109:
-//                        canvas.drawText("ʍ /", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//                    case 0x0645:
-//                        canvas.drawText(")", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
-//                        break;
-//
-//                }
-//
-//            }
-//
-//        }
+        for (Keyboard.Key key : keys) {
+            if (key.label != null) {
+                switch (key.codes[0]) {
+
+                    //qQ
+                    case 81:
+                    case 113:
+                        canvas.drawText("1",
+                                key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+                        break;
+                    //wW
+                    case 87:
+                    case 119:
+                        canvas.drawText("2", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+                        break;
+                    //eE
+                    case 69:
+                    case 101:
+                        canvas.drawText("3", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+                        break;
+                    //rR
+                    case 82:
+                    case 114:
+                        canvas.drawText("4", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+                        break;
+                    //tT
+                    case 84:
+                    case 116:
+                        canvas.drawText("5", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+                        break;
+                    //yY
+                    case 89:
+                    case 121:
+                        canvas.drawText("6", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+                        break;
+                    //uU
+                    case 85:
+                    case 117:
+                        canvas.drawText("7", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+                        break;
+                    //iI
+                    case 73:
+                    case 105:
+                        canvas.drawText("8", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+                        break;
+                    //oO
+                    case 79:
+                    case 111:
+                        canvas.drawText("9", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+                        break;
+                    //pP
+                    case 80:
+                    case 112:
+                        canvas.drawText("0", key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+                        break;
+
+
+
+                }
+
+            }
+
+        }
 
         //for color changing
 
@@ -1298,90 +1127,134 @@ public class KeyboardView extends View implements View.OnClickListener {
     protected boolean onLongPress(Keyboard.Key popupKey) {
 
         Log.d("mytag","values is");
-        int popupKeyboardId = popupKey.popupResId;
-
-        if (popupKeyboardId != 0) {
-            mMiniKeyboardContainer = mMiniKeyboardCache.get(popupKey);
-            if (mMiniKeyboardContainer == null) {
-                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
-                        Context.LAYOUT_INFLATER_SERVICE);
-                mMiniKeyboardContainer = inflater.inflate(mPopupLayout, null);
-                //---=
-                mMiniKeyboard = mMiniKeyboardContainer.findViewById(
-                        R.id.keyboardView);
-                View closeButton = null;
-//                View closeButton = mMiniKeyboardContainer.findViewById(R.id.closeButton);
-
-                if (closeButton != null) closeButton.setOnClickListener(this);
-                mMiniKeyboard.setOnKeyboardActionListener(new OnKeyboardActionListener() {
-                    public void onKey(int primaryCode, int[] keyCodes) {
-                        mKeyboardActionListener.onKey(primaryCode, keyCodes);
-                        dismissPopupKeyboard();
-                    }
-
-                    public void onText(CharSequence text) {
-                        mKeyboardActionListener.onText(text);
-                        dismissPopupKeyboard();
-                    }
-
-                    public void swipeLeft() {
-                    }
-
-                    public void swipeRight() {
-                    }
-
-                    public void swipeUp() {
-                    }
-
-                    public void swipeDown() {
-                    }
-
-                    public void onPress(int primaryCode) {
-                        mKeyboardActionListener.onPress(primaryCode);
-                    }
-
-                    public void onRelease(int primaryCode) {
-                        mKeyboardActionListener.onRelease(primaryCode);
-                    }
-                });
-                //mInputView.setSuggest(mSuggest);
-                Keyboard keyboard;
-                if (popupKey.popupCharacters != null) {
-                    keyboard = new Keyboard(getContext(), popupKeyboardId,
-                            popupKey.popupCharacters, -1, getPaddingLeft() + getPaddingRight());
-                } else {
-                    keyboard = new Keyboard(getContext(), popupKeyboardId);
-                }
-                mMiniKeyboard.setKeyboard(keyboard);
-                mMiniKeyboard.setPopupParent(this);
-                mMiniKeyboardContainer.measure(
-                        MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.AT_MOST),
-                        MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.AT_MOST));
-
-                mMiniKeyboardCache.put(popupKey, mMiniKeyboardContainer);
-            } else {
-                //---=
-                mMiniKeyboard = mMiniKeyboardContainer.findViewById(R.id.keyboardView);
-            }
-            getLocationInWindow(mCoordinates);
-            mPopupX = popupKey.x + getPaddingLeft();
-            mPopupY = popupKey.y + getPaddingTop();
-            mPopupX = mPopupX + popupKey.width - mMiniKeyboardContainer.getMeasuredWidth();
-            mPopupY = mPopupY - mMiniKeyboardContainer.getMeasuredHeight();
-            final int x = mPopupX + mMiniKeyboardContainer.getPaddingRight() + mCoordinates[0];
-            final int y = mPopupY + mMiniKeyboardContainer.getPaddingBottom() + mCoordinates[1];
-            mMiniKeyboard.setPopupOffset(x < 0 ? 0 : x, y);
-            mMiniKeyboard.setShifted(isShifted());
-            mPopupKeyboard.setContentView(mMiniKeyboardContainer);
-            mPopupKeyboard.setWidth(mMiniKeyboardContainer.getMeasuredWidth());
-            mPopupKeyboard.setHeight(mMiniKeyboardContainer.getMeasuredHeight());
-            mPopupKeyboard.showAtLocation(this, Gravity.NO_GRAVITY, x, y);
-            mMiniKeyboardOnScreen = true;
-            //mMiniKeyboard.onTouchEvent(getTranslatedEvent(me));
-            invalidateAllKeys();
+        if (popupKey.codes[0] == 'q') {
+            getOnKeyboardActionListener().onKey('1', null);
             return true;
         }
-        return false;
+       else if (popupKey.codes[0] == 'w') {
+            getOnKeyboardActionListener().onKey('2', null);
+            return true;
+        }
+        else if (popupKey.codes[0] == 'e') {
+            getOnKeyboardActionListener().onKey('3', null);
+            return true;
+        }
+        else if (popupKey.codes[0] == 'r') {
+            getOnKeyboardActionListener().onKey('4', null);
+            return true;
+        }
+        else if (popupKey.codes[0] == 't') {
+            getOnKeyboardActionListener().onKey('5', null);
+            return true;
+        }
+        else if (popupKey.codes[0] == 'y') {
+            getOnKeyboardActionListener().onKey('6', null);
+            return true;
+        }
+        else if (popupKey.codes[0] == 'u') {
+            getOnKeyboardActionListener().onKey('7', null);
+            return true;
+        }
+        else if (popupKey.codes[0] == 'i') {
+            getOnKeyboardActionListener().onKey('8', null);
+            return true;
+        }
+        else if (popupKey.codes[0] == 'o') {
+            getOnKeyboardActionListener().onKey('9', null);
+            return true;
+        }
+        else if (popupKey.codes[0] == 'p') {
+            getOnKeyboardActionListener().onKey('0', null);
+            return true;
+        }
+        return  false;
+
+
+
+//        int popupKeyboardId = popupKey.popupResId;
+//        if (popupKeyboardId != 0) {
+//            mMiniKeyboardContainer = mMiniKeyboardCache.get(popupKey);
+//            if (mMiniKeyboardContainer == null) {
+//                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
+//                        Context.LAYOUT_INFLATER_SERVICE);
+//                mMiniKeyboardContainer = inflater.inflate(mPopupLayout, null);
+//                //---=
+//                mMiniKeyboard = mMiniKeyboardContainer.findViewById(
+//                        R.id.keyboardView);
+//                View closeButton = null;
+////                View closeButton = mMiniKeyboardContainer.findViewById(R.id.closeButton);
+//
+//                if (closeButton != null) closeButton.setOnClickListener(this);
+//                mMiniKeyboard.setOnKeyboardActionListener(new OnKeyboardActionListener() {
+//                    public void onKey(int primaryCode, int[] keyCodes) {
+//                        mKeyboardActionListener.onKey(primaryCode, keyCodes);
+//                        dismissPopupKeyboard();
+//                    }
+//
+//                    public void onText(CharSequence text) {
+//                        mKeyboardActionListener.onText(text);
+//                        dismissPopupKeyboard();
+//                    }
+//
+//                    public void swipeLeft() {
+//                    }
+//
+//                    public void swipeRight() {
+//                    }
+//
+//                    public void swipeUp() {
+//                    }
+//
+//                    public void swipeDown() {
+//                    }
+//
+//                    public void onPress(int primaryCode) {
+//                        mKeyboardActionListener.onPress(primaryCode);
+//                    }
+//
+//                    public void onRelease(int primaryCode) {
+//                        mKeyboardActionListener.onRelease(primaryCode);
+//                    }
+//                });
+//                //mInputView.setSuggest(mSuggest);
+//                Keyboard keyboard;
+//                if (popupKey.popupCharacters != null) {
+//                    keyboard = new Keyboard(getContext(), popupKeyboardId,
+//                            popupKey.popupCharacters, -1, getPaddingLeft() + getPaddingRight());
+//                } else {
+//                    keyboard = new Keyboard(getContext(), popupKeyboardId);
+//                }
+//                mMiniKeyboard.setKeyboard(keyboard);
+//                mMiniKeyboard.setPopupParent(this);
+//                mMiniKeyboardContainer.measure(
+//                        MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.AT_MOST),
+//                        MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.AT_MOST));
+//
+//                mMiniKeyboardCache.put(popupKey, mMiniKeyboardContainer);
+//            } else {
+//                //---=
+//                mMiniKeyboard = mMiniKeyboardContainer.findViewById(R.id.keyboardView);
+//            }
+//            getLocationInWindow(mCoordinates);
+//            mPopupX = popupKey.x + getPaddingLeft();
+//            mPopupY = popupKey.y + getPaddingTop();
+//            mPopupX = mPopupX + popupKey.width - mMiniKeyboardContainer.getMeasuredWidth();
+//            mPopupY = mPopupY - mMiniKeyboardContainer.getMeasuredHeight();
+//            final int x = mPopupX + mMiniKeyboardContainer.getPaddingRight() + mCoordinates[0];
+//            final int y = mPopupY + mMiniKeyboardContainer.getPaddingBottom() + mCoordinates[1];
+//            mMiniKeyboard.setPopupOffset(x < 0 ? 0 : x, y);
+//            mMiniKeyboard.setShifted(isShifted());
+//            mPopupKeyboard.setContentView(mMiniKeyboardContainer);
+//            mPopupKeyboard.setWidth(mMiniKeyboardContainer.getMeasuredWidth());
+//            mPopupKeyboard.setHeight(mMiniKeyboardContainer.getMeasuredHeight());
+//            mPopupKeyboard.showAtLocation(this, Gravity.NO_GRAVITY, x, y);
+//            mMiniKeyboardOnScreen = true;
+//            //mMiniKeyboard.onTouchEvent(getTranslatedEvent(me));
+//            invalidateAllKeys();
+//            return true;
+//        }
+//        return false;
+
     }
 
     @Override

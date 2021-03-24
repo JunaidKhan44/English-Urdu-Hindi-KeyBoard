@@ -26,6 +26,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.util.Xml;
+import android.view.inputmethod.EditorInfo;
 
 
 import com.example.create_keyboard1.R;
@@ -976,4 +977,8 @@ public class Keyboard {
         }
         return defValue;
     }
+
+
+
+
 }

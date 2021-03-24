@@ -1,54 +1,50 @@
 <Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:keyWidth="10%p"
-    app:horizontalGap="0px"
-    app:verticalGap="5px"
+    app:horizontalGap="3px"
+    app:verticalGap="4px"
     app:keyHeight="50dp"
+
     >
-
-
     <Row>
-        <Key app:codes="207" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24"  app:keyWidth="18%p" />
-        <Key app:codes="206" app:keyIcon="@drawable/ic_baseline_insert_emoticon_24" app:keyWidth="16%p"/>
-        <Key app:codes="55" app:keyIcon="@drawable/ic_baseline_mic_24" app:keyWidth="16%p" />
-        <Key app:codes="56" app:keyIcon="@drawable/ic_baseline_sticky_note_2_24" app:keyWidth="16%p"/>
-        <Key app:codes="57" app:keyIcon="@drawable/ic_baseline_color_lens_24" app:keyWidth="16%p"/>
-        <Key app:codes="48" app:keyIcon="@drawable/ic_baseline_settings_24" app:keyEdgeFlags="right" app:keyWidth="18%p"/>
+        <Key app:codes="0x0706" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24"  app:keyWidth="19%p" />
+        <Key app:codes="0x0707" app:keyIcon="@drawable/ic_baseline_insert_emoticon_24" app:keyWidth="19%p"/>
+        <Key app:codes="0x0708" app:keyIcon="@drawable/ic_baseline_mic_24" app:keyWidth="19%p" />
+        <Key app:codes="0x0709" app:keyIcon="@drawable/ic_baseline_color_lens_24" app:keyWidth="19%p"/>
+        <Key app:codes="0x070A" app:keyIcon="@drawable/ic_baseline_settings_24" app:keyEdgeFlags="right" app:keyWidth="20%p"/>
     </Row>
-
     <Row>
-        <Key app:codes="43" app:keyLabel="+" app:keyEdgeFlags="left" app:keyWidth="20%p" />
-        <Key app:codes="49" app:keyLabel="1"  app:keyWidth="20%p"/>
-        <Key app:codes="50" app:keyLabel="2" app:keyWidth="20%p"/>
-        <Key app:codes="51" app:keyLabel="3" app:keyWidth="20%p"/>
+        <Key app:codes="43" app:keyLabel="+" app:keyEdgeFlags="left" app:keyWidth="19%p" />
+        <Key app:codes="49" app:keyLabel="1"  app:keyWidth="19%p"/>
+        <Key app:codes="50" app:keyLabel="2" app:keyWidth="19%p"/>
+        <Key app:codes="51" app:keyLabel="3" app:keyWidth="19%p"/>
         <Key app:codes="0x0025" app:keyLabel="%" app:keyEdgeFlags="right" app:keyWidth="20%p"/>
     </Row>
 
     <Row>
-        <Key app:codes="0x2212" app:keyLabel="−" app:keyEdgeFlags="left" app:keyWidth="20%p" />
-        <Key app:codes="52" app:keyLabel="4"  app:keyWidth="20%p"/>
-        <Key app:codes="53" app:keyLabel="5" app:keyWidth="20%p"/>
-        <Key app:codes="54" app:keyLabel="6" app:keyWidth="20%p"/>
+        <Key app:codes="0x2212" app:keyLabel="−" app:keyEdgeFlags="left" app:keyWidth="19%p" />
+        <Key app:codes="52" app:keyLabel="4"  app:keyWidth="19%p"/>
+        <Key app:codes="53" app:keyLabel="5" app:keyWidth="19%p"/>
+        <Key app:codes="54" app:keyLabel="6" app:keyWidth="19%p"/>
         <Key app:codes="32" app:keyLabel="˽" app:keyEdgeFlags="right" app:keyWidth="20%p"/>
     </Row>
 
     <Row>
-        <Key app:codes="42" app:keyLabel="*" app:keyEdgeFlags="left" app:keyWidth="25%p" />
+        <Key app:codes="42" app:keyLabel="*" app:keyEdgeFlags="left" app:keyWidth="19%p" />
         <Key app:codes="55" app:keyLabel="7"  app:keyWidth="15%p"/>
         <Key app:codes="56" app:keyLabel="8" app:keyWidth="15%p"/>
         <Key app:codes="57" app:keyLabel="9" app:keyWidth="15%p"/>
         <Key app:codes="47" app:keyLabel="/"  app:keyWidth="15%p"/>
-        <Key app:codes="-5" app:keyLabel="⌫" app:keyEdgeFlags="right" app:keyWidth="15%p"/>
+        <Key app:codes="-5" app:keyIcon="@drawable/ic_backspace" app:keyEdgeFlags="right" app:keyWidth="15%p"/>
     </Row>
 
     <Row app:rowEdgeFlags="bottom">
         <Key app:codes="0x1111" app:keyLabel="\?ABC" app:keyWidth="15%p"  app:keyEdgeFlags="left"/>
         <Key app:codes="44" app:keyLabel="," app:keyWidth="8%p" />
         <Key app:codes="0x221E" app:keyLabel="!?#" app:keyWidth="15%p" app:isRepeatable="true"/>
-        <Key app:codes="48" app:keyLabel="0" app:keyWidth="25%p" app:isRepeatable="true"/>
+        <Key app:codes="48" app:keyLabel="0" app:keyWidth="20%p" app:isRepeatable="true"/>
         <Key app:codes="61" app:keyLabel="=" app:keyWidth="10%p" app:isRepeatable="true"/>
         <Key app:codes="46" app:keyLabel="." app:keyWidth="10%p" app:isRepeatable="true"/>
-        <Key app:codes="-4" app:keyLabel="⏎" app:keyWidth="20%p" app:keyEdgeFlags="right"/>
+        <Key app:codes="-4" app:keyLabel="⏎" app:keyWidth="16%p" app:keyEdgeFlags="right"/>
     </Row>
 
 

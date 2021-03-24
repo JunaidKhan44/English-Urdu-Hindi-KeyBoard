@@ -1,13 +1,12 @@
-package com.example.create_keyboard1;
+package com.example.create_keyboard1.Otherclasses;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.widget.Toast;
 
+import com.example.create_keyboard1.Adapter.PageAdapter;
+import com.example.create_keyboard1.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 

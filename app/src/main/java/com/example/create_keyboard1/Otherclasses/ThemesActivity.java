@@ -1,4 +1,4 @@
-package com.example.create_keyboard1;
+package com.example.create_keyboard1.Otherclasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +9,7 @@ import android.view.Display;
 
 import com.example.create_keyboard1.Adapter.MyAdapter;
 import com.example.create_keyboard1.Model.Model;
+import com.example.create_keyboard1.R;
 
 import java.util.ArrayList;
 

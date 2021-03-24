@@ -1,66 +1,77 @@
 <Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     app:keyWidth="10%p"
-    app:horizontalGap="0px"
-    app:verticalGap="0px"
+    app:horizontalGap="2px"
+    app:verticalGap="4px"
     app:keyHeight="50dp"
 
     >
+
+
+
     <Row>
-        <Key app:codes="0x095B" app:keyLabel="ज़" app:keyEdgeFlags="left"/>
-        <Key app:codes="0x095C" app:keyLabel="ड़"/>
-        <Key app:codes="0x095D" app:keyLabel="ढ़"/>
-        <Key app:codes="0x095E" app:keyLabel="फ़"/>
-        <Key app:codes="0x095F" app:keyLabel="य़"/>
-        <Key app:codes="0x0960" app:keyLabel="ॠ"/>
-        <Key app:codes="0x0961" app:keyLabel="ॡ"/>
-        <Key app:codes="0x0962" app:keyLabel="ॢ"/>
-        <Key app:codes="0x0963" app:keyLabel="ॣ"/>
-        <Key app:codes="0x0964" app:keyLabel="।" app:keyEdgeFlags="right"/>
+        <Key app:codes="0x0706" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24"  app:keyWidth="20%p"  />
+        <Key app:codes="0x0707" app:keyIcon="@drawable/ic_baseline_insert_emoticon_24" app:keyWidth="20%p"/>
+        <Key app:codes="0x0708" app:keyIcon="@drawable/ic_baseline_mic_24" app:keyWidth="20%p" />
+        <Key app:codes="0x0709" app:keyIcon="@drawable/ic_baseline_color_lens_24" app:keyWidth="20%p"/>
+        <Key app:codes="0x070A" app:keyIcon="@drawable/ic_baseline_settings_24" app:keyEdgeFlags="right" app:keyWidth="20%p"/>
     </Row>
 
     <Row>
-        <Key app:codes="0x0965" app:keyLabel="॥" app:keyEdgeFlags="left"/>
-        <Key app:codes="0x0966" app:keyLabel="०"/>
-        <Key app:codes="0x0967" app:keyLabel="१"/>
-        <Key app:codes="0x0968" app:keyLabel="२"/>
-        <Key app:codes="0x0969" app:keyLabel="३"/>
-        <Key app:codes="0x096A" app:keyLabel="४"/>
-        <Key app:codes="0x096B" app:keyLabel="५"/>
-        <Key app:codes="0x096C" app:keyLabel="६"/>
-        <Key app:codes="0x096D" app:keyLabel="७"/>
-        <Key app:codes="0x096E" app:keyLabel="८" app:keyEdgeFlags="right"/>
+        <Key app:codes="0x095B" app:keyLabel="ज़" app:keyEdgeFlags="left" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x095C" app:keyLabel="ड़" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x095D" app:keyLabel="ढ़" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x095E" app:keyLabel="फ़" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x095F" app:keyLabel="य़" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0960" app:keyLabel="ॠ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0961" app:keyLabel="ॡ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0962" app:keyLabel="ॢ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0963" app:keyLabel="ॣ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0964" app:keyLabel="।" app:keyEdgeFlags="right" app:keyWidth="9.5%p"/>
     </Row>
 
     <Row>
-        <Key app:codes="0x096F" app:keyLabel="९" app:keyEdgeFlags="left"/>
-        <Key app:codes="0x0970" app:keyLabel="॰"/>
-        <Key app:codes="0x0971" app:keyLabel="ॱ"/>
-        <Key app:codes="0x0972" app:keyLabel="ॲ"/>
-        <Key app:codes="0x0973" app:keyLabel="ॳ"/>
-        <Key app:codes="0x0974" app:keyLabel="ॴ"/>
-        <Key app:codes="0x0975" app:keyLabel="ॵ"/>
-        <Key app:codes="0x0976" app:keyLabel="ॶ"/>
-        <Key app:codes="0x0977" app:keyLabel="ॷ"/>
-        <Key app:codes="0x0978" app:keyLabel="ॸ" app:keyEdgeFlags="right"/>
+        <Key app:codes="0x0965" app:keyLabel="॥" app:keyEdgeFlags="left" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0966" app:keyLabel="०" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0967" app:keyLabel="१" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0968" app:keyLabel="२" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0969" app:keyLabel="३" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x096A" app:keyLabel="४" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x096B" app:keyLabel="५" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x096C" app:keyLabel="६" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x096D" app:keyLabel="७" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x096E" app:keyLabel="८" app:keyEdgeFlags="right" app:keyWidth="9.5%p"/>
+    </Row>
+
+    <Row>
+        <Key app:codes="0x096F" app:keyLabel="९" app:keyEdgeFlags="left" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0970" app:keyLabel="॰" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0971" app:keyLabel="ॱ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0972" app:keyLabel="ॲ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0973" app:keyLabel="ॳ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0974" app:keyLabel="ॴ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0975" app:keyLabel="ॵ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0976" app:keyLabel="ॶ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0977" app:keyLabel="ॷ" app:keyWidth="9.5%p"/>
+        <Key app:codes="0x0978" app:keyLabel="ॸ" app:keyEdgeFlags="right" app:keyWidth="9.5%p"/>
     </Row>
     <Row>
-        <Key app:codes="0x0D26" app:keyLabel="3/3"  app:keyWidth="15%p" app:keyEdgeFlags="left"/>
-        <Key app:codes="0x0979" app:keyLabel="ॹ"  />
-        <Key app:codes="0x097A" app:keyLabel="ॺ"  />
-        <Key app:codes="0x097B" app:keyLabel="ॻ"  />
-        <Key app:codes="0x097C" app:keyLabel="ॼ"  />
-        <Key app:codes="0x097D" app:keyLabel="ॽ"  />
-        <Key app:codes="0x097E" app:keyLabel="ॾ"  />
-        <Key app:codes="0x097F" app:keyLabel="ॿ"   />
-        <Key app:codes="-5" app:keyLabel="⌫" app:keyWidth="15%p" app:isRepeatable="true"/>
+        <Key app:codes="0x0D26" app:keyLabel="3/3"  app:keyWidth="15%p" app:keyEdgeFlags="left" />
+        <Key app:codes="0x0979" app:keyLabel="ॹ"  app:keyWidth="9.5%p" />
+        <Key app:codes="0x097A" app:keyLabel="ॺ"  app:keyWidth="9.5%p"/>
+        <Key app:codes="0x097B" app:keyLabel="ॻ"  app:keyWidth="9.5%p"/>
+        <Key app:codes="0x097C" app:keyLabel="ॼ"  app:keyWidth="9.5%p"/>
+        <Key app:codes="0x097D" app:keyLabel="ॽ"  app:keyWidth="9.5%p"/>
+        <Key app:codes="0x097E" app:keyLabel="ॾ"  app:keyWidth="9.5%p"/>
+        <Key app:codes="0x097F" app:keyLabel="ॿ"  app:keyWidth="9.5%p" />
+        <Key app:codes="-5" app:keyIcon="@drawable/ic_backspace" app:keyWidth="15%p" app:isRepeatable="true"/>
     </Row>
     <Row app:rowEdgeFlags="bottom">
-        <Key app:codes="0x061F,49,50,51" app:keyLabel="123؟" app:keyWidth="15%p"  app:keyEdgeFlags="left"/>
-        <Key app:codes="0x060C" app:keyLabel="،" app:keyWidth="5%p" />
+        <Key app:codes="0x061F,49,50,51" app:keyLabel="12؟" app:keyWidth="15%p"  app:keyEdgeFlags="left"/>
+        <Key app:codes="0x060C" app:keyLabel="،" app:keyWidth="6%p" />
         <Key app:codes="0x2752" app:keyLabel="🌎" app:keyWidth="10%p" app:isRepeatable="true"  />
-        <Key app:codes="32" app:keyLabel="जगह" app:keyWidth="40%p" app:isRepeatable="true"/>
+        <Key app:codes="32" app:keyLabel="जगह" app:keyWidth="39%p" app:isRepeatable="true"/>
         <Key app:codes="0x2936" app:keyLabel="-" app:keyWidth="10%p" app:keyEdgeFlags="right"/>
-        <Key app:codes="-4" app:keyLabel="⏎" app:keyWidth="20%p" app:keyEdgeFlags="right"/>
+        <Key app:codes="-4" app:keyLabel="⏎" app:keyWidth="17%p" app:keyEdgeFlags="right"/>
     </Row>
 </Keyboard>

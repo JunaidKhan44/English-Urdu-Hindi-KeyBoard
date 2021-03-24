@@ -1,21 +1,18 @@
 <Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     app:keyWidth="10%p"
-    app:horizontalGap="0px"
-    app:verticalGap="0px"
-    app:keyHeight="50dp"
+    app:horizontalGap="2px"
+    app:verticalGap="4px"
+    app:keyHeight="45dp"
     >
 
-
     <Row>
-        <Key app:codes="207" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24"  app:keyWidth="18%p" />
-        <Key app:codes="206" app:keyIcon="@drawable/ic_baseline_insert_emoticon_24" app:keyWidth="16%p"/>
-        <Key app:codes="55" app:keyIcon="@drawable/ic_baseline_mic_24" app:keyWidth="16%p" />
-        <Key app:codes="56" app:keyIcon="@drawable/ic_baseline_sticky_note_2_24" app:keyWidth="16%p"/>
-        <Key app:codes="57" app:keyIcon="@drawable/ic_baseline_color_lens_24" app:keyWidth="16%p"/>
-        <Key app:codes="48" app:keyIcon="@drawable/ic_baseline_settings_24" app:keyEdgeFlags="right" app:keyWidth="18%p"/>
+        <Key app:codes="0x0706" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24"  app:keyWidth="20%p" />
+        <Key app:codes="0x0707" app:keyIcon="@drawable/ic_baseline_insert_emoticon_24" app:keyWidth="20%p"/>
+        <Key app:codes="0x0708" app:keyIcon="@drawable/ic_baseline_mic_24" app:keyWidth="20%p" />
+        <Key app:codes="0x0709" app:keyIcon="@drawable/ic_baseline_color_lens_24" app:keyWidth="20%p"/>
+        <Key app:codes="0x070A" app:keyIcon="@drawable/ic_baseline_settings_24" app:keyEdgeFlags="right" app:keyWidth="20%p"/>
     </Row>
-
     <Row>
         <Key app:codes="0x0635" app:keyLabel="ص" app:keyEdgeFlags="left"/>
         <Key app:codes="0x0636" app:keyLabel="ض"/>
@@ -37,7 +34,7 @@
         <Key app:codes="0x062A" app:keyLabel="ت"/>
         <Key app:codes="0x06D2" app:keyLabel="ے"/>
         <Key app:codes="0x0621" app:keyLabel="ء"/>
-        <Key app:codes="0x0649" app:keyLabel="ى"/>
+        <Key app:codes="0x064A" app:keyLabel="ي"/>
         <Key app:codes="0x06D5" app:keyLabel="ە"/>
         <Key app:codes="0x067E" app:keyLabel="پ" app:keyEdgeFlags="right"/>
     </Row>
@@ -49,10 +46,10 @@
         <Key app:codes="0x0647" app:keyLabel="ه"/>
         <Key app:codes="0x06AF" app:keyLabel="گ"/>
         <Key app:codes="0x0641" app:keyLabel="ف"/>
-        <Key app:codes="0x0631" app:keyLabel="ر"/>
+        <Key app:codes="0x0689" app:keyLabel="ډ"/>
         <Key app:codes="0x0688" app:keyLabel="ڈ"/>
         <Key app:codes="0x0633" app:keyLabel="س"/>
-        <Key app:codes="0x0627" app:keyLabel="ا" app:keyEdgeFlags="right"/>
+        <Key app:codes="0x0627" app:keyLabel="ا"   app:keyEdgeFlags="right"/>
     </Row>
     <Row>
         <Key app:codes="0x0630" app:keyLabel="ذ"  app:keyWidth="09%p" app:keyEdgeFlags="left"/>
@@ -64,7 +61,7 @@
         <Key app:codes="0x06BA" app:keyLabel="ں"  app:keyWidth="09%p" />
         <Key app:codes="0x0646" app:keyLabel="ن"  app:keyWidth="09%p"/>
         <Key app:codes="0x0645" app:keyLabel="م"  app:keyWidth="09%p"/>
-        <Key app:codes="-5" app:keyLabel="⌫" app:keyWidth="19%p" app:isRepeatable="true"/>
+        <Key app:codes="-5" app:keyIcon="@drawable/ic_backspace" app:keyWidth="19%p" app:isRepeatable="true"/>
     </Row>
     <Row app:rowEdgeFlags="bottom">
         <Key app:codes="0xFE70" app:keyLabel="١٢٣؟" app:keyWidth="20%p"  app:keyEdgeFlags="left"/>
