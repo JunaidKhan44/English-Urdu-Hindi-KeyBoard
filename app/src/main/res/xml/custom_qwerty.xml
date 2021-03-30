@@ -1,7 +1,7 @@
 <Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:keyWidth="10%p"
-    app:horizontalGap="2px"
+
+    app:horizontalGap="0.5%p"
     app:verticalGap="4px"
     app:keyHeight="50dp"
 
@@ -28,7 +28,7 @@
     </Row>
     <Row>
 
-        <Key app:codes="97" app:keyLabel="a" app:horizontalGap="5%p"  />
+        <Key app:codes="97" app:keyLabel="a" app:horizontalGap="4%p"  />
         <Key app:codes="115" app:keyLabel="s"/>
         <Key app:codes="100" app:keyLabel="d"/>
         <Key app:codes="102" app:keyLabel="f"/>
@@ -51,12 +51,12 @@
         <Key app:codes="-5" app:keyIcon="@drawable/ic_backspace" app:keyWidth="15%p" app:isRepeatable="true" app:keyEdgeFlags="right"/>
     </Row>
     <Row app:rowEdgeFlags="bottom">
-        <Key app:codes="0x1557" app:keyLabel="\?123" app:keyWidth="17%p"  app:keyEdgeFlags="left"/>
+        <Key app:codes="-6" app:keyLabel="\?123" app:keyWidth="17%p"  app:keyEdgeFlags="left"/>
         <Key app:codes="44" app:keyLabel="," app:keyWidth="10%p" />
         <Key app:codes="0x1F310" app:keyLabel="🌐" app:keyWidth="10%p" app:isRepeatable="true"/>
         <Key app:codes="32" app:keyLabel="SPACE" app:keyWidth="30%p" app:isRepeatable="true"/>
         <Key app:codes="46" app:keyLabel="." app:keyWidth="10%p" app:isRepeatable="true"/>
-        <Key app:codes="-4" app:keyLabel="⏎" app:keyWidth="20%p" app:keyEdgeFlags="right"/>
+        <Key app:codes="-4" app:keyIcon="@drawable/ic_enter" app:keyWidth="20%p" app:keyEdgeFlags="right"/>
     </Row>
 </Keyboard>
 

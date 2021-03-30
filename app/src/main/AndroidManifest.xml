@@ -8,17 +8,21 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/splashicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/splashicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Create_Keyboard1">
-        <activity android:name=".Otherclasses.SettingActivity"></activity>
+        <activity android:name=".Otherclasses.InAppPurchase"></activity>
+        <activity android:name=".Otherclasses.InstructionScreenS" />
+        <activity android:name=".Otherclasses.PrivacyPolicy" />
+        <activity android:name=".Otherclasses.KeyboardThemeActivity" />
+        <activity android:name=".Otherclasses.SettingActivity" />
         <activity android:name=".Otherclasses.ExitScreen" />
         <activity android:name=".Otherclasses.Speech" />
         <activity android:name=".Otherclasses.Background" />

@@ -1,6 +1,6 @@
 <Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:horizontalGap="2px"
+    app:horizontalGap="0.5%p"
     app:verticalGap="4px"
     app:keyHeight="50dp"
     >

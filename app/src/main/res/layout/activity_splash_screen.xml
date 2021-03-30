@@ -4,73 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Otherclasses.SplashScreen"
-    android:background="@drawable/gradient_ui">
-
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@drawable/icons"
-        android:id="@+id/appicon"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/appicon"
-        android:text="English Urdu Keyboard"
-        android:layout_marginTop="2dp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:fontFamily="@font/montserrat_alternates"/>
-
-
+    android:background="@color/backgroundapp"
+    tools:context=".Otherclasses.SplashScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/pp4"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp">
-
+        android:layout_alignParentTop="true"
+        android:layout_margin="20dp"
+        android:layout_above="@+id/bottom"
+        android:id="@+id/top">
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginLeft="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:background="@color/white"
-            app:cardCornerRadius="15dp"
-            app:cardBackgroundColor="@color/white"
-            android:layout_centerInParent="true"
-            android:visibility="visible"
-            android:id="@+id/card"
-            android:onClick="nextactivity"
+            android:backgroundTint="@color/backgroundapp"
+            app:cardCornerRadius="20dp"
+            android:id="@+id/cardcontainer"
+            app:strokeColor="@color/buttoncolor"
+            app:strokeWidth="2dp">
 
-            >
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/native_ad_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Continue"
-                    android:textSize="18sp"
-                    android:textColor="@color/black"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/montserrat_alternates"
-                    android:id="@+id/txt7"
-                    />
-            </RelativeLayout>
+                android:text="Ad is loading.."
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:id="@+id/loading"/>
+
+            <ProgressBar
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:outlineAmbientShadowColor="@color/buttoncolor"
+                android:id="@+id/prograssbar"/>
 
         </com.google.android.material.card.MaterialCardView>
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:onClick="nextactivity"
+        android:id="@+id/bottom"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/splashicon"
+            android:id="@+id/spl"/>
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nextbtn"
+            android:layout_below="@+id/spl"
+
+            />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

@@ -64,11 +64,11 @@
         <Key app:codes="-5" app:keyIcon="@drawable/ic_backspace" app:keyWidth="19%p" app:isRepeatable="true"/>
     </Row>
     <Row app:rowEdgeFlags="bottom">
-        <Key app:codes="0xFE70" app:keyLabel="١٢٣؟" app:keyWidth="20%p"  app:keyEdgeFlags="left"/>
+        <Key app:codes="-62" app:keyLabel="١٢٣؟" app:keyWidth="20%p"  app:keyEdgeFlags="left"/>
         <Key app:codes="0x060C" app:keyLabel="،" app:keyWidth="10%p" />
         <Key app:codes="0x2666" app:keyLabel="🌐" app:keyWidth="10%p" app:isRepeatable="true"  />
         <Key app:codes="32" app:keyLabel="اردو" app:keyWidth="40%p" app:isRepeatable="true"/>
         <Key app:codes="0x2936" app:keyLabel="-" app:keyWidth="10%p" app:keyEdgeFlags="right"/>
-        <Key app:codes="-4" app:keyLabel="⏎" app:keyWidth="20%p" app:keyEdgeFlags="right"/>
+        <Key app:codes="-4" app:keyIcon="@drawable/ic_enter" app:keyWidth="20%p" app:keyEdgeFlags="right"/>
     </Row>
 </Keyboard>

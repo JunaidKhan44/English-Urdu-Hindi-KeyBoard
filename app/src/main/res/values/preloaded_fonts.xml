@@ -3,6 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aldrich</item>
         <item>@font/anonymous_pro</item>
+        <item>@font/montserrat</item>
         <item>@font/montserrat_alternates</item>
         <item>@font/montserrat_subrayada</item>
     </array>

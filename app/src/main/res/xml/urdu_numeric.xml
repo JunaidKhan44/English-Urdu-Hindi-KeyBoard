@@ -54,12 +54,12 @@
     </Row>
 
     <Row app:rowEdgeFlags="bottom">
-        <Key app:codes="0x1111" app:keyLabel="\?ABC" app:keyWidth="18%p"  app:keyEdgeFlags="left"/>
+        <Key app:codes="-61" app:keyLabel="\?ABC" app:keyWidth="18%p"  app:keyEdgeFlags="left"/>
         <Key app:codes="44" app:keyLabel="," app:keyWidth="10%p" />
         <Key app:codes="0x2121" app:keyLabel="12" app:keyWidth="10%p" app:isRepeatable="true"/>
         <Key app:codes="32" app:keyLabel="SPACE" app:keyWidth="38%p" app:isRepeatable="true"/>
         <Key app:codes="46" app:keyLabel="." app:keyWidth="15%p" app:isRepeatable="true"/>
-        <Key app:codes="-4" app:keyLabel="⏎" app:keyWidth="19%p" app:keyEdgeFlags="right"/>
+        <Key app:codes="-4" app:keyIcon="@drawable/ic_enter" app:keyWidth="19%p" app:keyEdgeFlags="right"/>
     </Row>
 </Keyboard>
 

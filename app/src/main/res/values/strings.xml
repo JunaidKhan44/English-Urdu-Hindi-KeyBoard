@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Create_Keyboard1</string>
-    <string name="simple_ime">Simple IME</string>
+    <string name="app_name">English-اردو-Hindi</string>
+    <string name="simple_ime">English-اردو-Hindi</string>
     <string name="subtype_en_US">English (US)</string>
     <string name="doublequote">""</string>
     <string name="one">1</string>
@@ -16,10 +16,18 @@
     <string name="Alaf">آ</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="text">Please Confirm to Exit?</string>
-    <string name="simple_kb">Punjabi مکمل KeyBoard</string>
-    <string name="subtype_ur_PK">Punjabi Wide</string>
+    <string name="text">Do You Want To</string>
     <string name="word_separators">\u000a\u0020.,;:!?\n()[]*#\'\"%&amp;$@{}/&lt;&gt;_-+=|&quot;1234567890</string>
     <string name="urdu_separators">\u060E\u060C\u06D4\u061F\uFDFD\u0601\u0611\u0612\u0613\u0610\u06F0\u06F1\u06F2\u06F3\u06F4\u06F5\u06F6\u06F7\u06F8\u06F9</string>
+    <string name="privacy"><![CDATA[ Privacy &]]></string>
+    <string name="policy"> Policy</string>
+    <string name="text2">Exit?</string>
+
+
+    <!--test-->
+    <string name="FbInterstitialAd">IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID</string>
+    <string name="FbBannerAd">IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID</string>
+    <string name="FbNativeAd">IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID</string>
+
 
 </resources>

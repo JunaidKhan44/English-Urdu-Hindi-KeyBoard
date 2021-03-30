@@ -1,5 +1,6 @@
 package com.example.create_keyboard1.util;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,6 +39,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.GROUPSNAME_SHARED_PREF1;
+import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.POSITION_AD1;
+import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.SHARED_PREF_NAME1;
 import static com.example.create_keyboard1.Otherclasses.SimpleIME.ic;
 
 /**
@@ -55,6 +59,8 @@ import static com.example.create_keyboard1.Otherclasses.SimpleIME.ic;
  * @attr ref android.R.styleable#KeyboardView_popupLayout
  */
 public class KeyboardView extends View implements View.OnClickListener {
+
+    private SharedPreferences sharedPreferences1;
 
     /**
      * Listener for virtual keyboard events.
@@ -1125,135 +1131,141 @@ public class KeyboardView extends View implements View.OnClickListener {
      * method on the base class if the subclass doesn't wish to handle the call.
      */
     protected boolean onLongPress(Keyboard.Key popupKey) {
-
-        Log.d("mytag","values is");
-        if (popupKey.codes[0] == 'q') {
-            getOnKeyboardActionListener().onKey('1', null);
-            return true;
-        }
-       else if (popupKey.codes[0] == 'w') {
-            getOnKeyboardActionListener().onKey('2', null);
-            return true;
-        }
-        else if (popupKey.codes[0] == 'e') {
-            getOnKeyboardActionListener().onKey('3', null);
-            return true;
-        }
-        else if (popupKey.codes[0] == 'r') {
-            getOnKeyboardActionListener().onKey('4', null);
-            return true;
-        }
-        else if (popupKey.codes[0] == 't') {
-            getOnKeyboardActionListener().onKey('5', null);
-            return true;
-        }
-        else if (popupKey.codes[0] == 'y') {
-            getOnKeyboardActionListener().onKey('6', null);
-            return true;
-        }
-        else if (popupKey.codes[0] == 'u') {
-            getOnKeyboardActionListener().onKey('7', null);
-            return true;
-        }
-        else if (popupKey.codes[0] == 'i') {
-            getOnKeyboardActionListener().onKey('8', null);
-            return true;
-        }
-        else if (popupKey.codes[0] == 'o') {
-            getOnKeyboardActionListener().onKey('9', null);
-            return true;
-        }
-        else if (popupKey.codes[0] == 'p') {
-            getOnKeyboardActionListener().onKey('0', null);
-            return true;
-        }
-        return  false;
-
-
-
-//        int popupKeyboardId = popupKey.popupResId;
-//        if (popupKeyboardId != 0) {
-//            mMiniKeyboardContainer = mMiniKeyboardCache.get(popupKey);
-//            if (mMiniKeyboardContainer == null) {
-//                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
-//                        Context.LAYOUT_INFLATER_SERVICE);
-//                mMiniKeyboardContainer = inflater.inflate(mPopupLayout, null);
-//                //---=
-//                mMiniKeyboard = mMiniKeyboardContainer.findViewById(
-//                        R.id.keyboardView);
-//                View closeButton = null;
-////                View closeButton = mMiniKeyboardContainer.findViewById(R.id.closeButton);
 //
-//                if (closeButton != null) closeButton.setOnClickListener(this);
-//                mMiniKeyboard.setOnKeyboardActionListener(new OnKeyboardActionListener() {
-//                    public void onKey(int primaryCode, int[] keyCodes) {
-//                        mKeyboardActionListener.onKey(primaryCode, keyCodes);
-//                        dismissPopupKeyboard();
-//                    }
-//
-//                    public void onText(CharSequence text) {
-//                        mKeyboardActionListener.onText(text);
-//                        dismissPopupKeyboard();
-//                    }
-//
-//                    public void swipeLeft() {
-//                    }
-//
-//                    public void swipeRight() {
-//                    }
-//
-//                    public void swipeUp() {
-//                    }
-//
-//                    public void swipeDown() {
-//                    }
-//
-//                    public void onPress(int primaryCode) {
-//                        mKeyboardActionListener.onPress(primaryCode);
-//                    }
-//
-//                    public void onRelease(int primaryCode) {
-//                        mKeyboardActionListener.onRelease(primaryCode);
-//                    }
-//                });
-//                //mInputView.setSuggest(mSuggest);
-//                Keyboard keyboard;
-//                if (popupKey.popupCharacters != null) {
-//                    keyboard = new Keyboard(getContext(), popupKeyboardId,
-//                            popupKey.popupCharacters, -1, getPaddingLeft() + getPaddingRight());
-//                } else {
-//                    keyboard = new Keyboard(getContext(), popupKeyboardId);
-//                }
-//                mMiniKeyboard.setKeyboard(keyboard);
-//                mMiniKeyboard.setPopupParent(this);
-//                mMiniKeyboardContainer.measure(
-//                        MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.AT_MOST),
-//                        MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.AT_MOST));
-//
-//                mMiniKeyboardCache.put(popupKey, mMiniKeyboardContainer);
-//            } else {
-//                //---=
-//                mMiniKeyboard = mMiniKeyboardContainer.findViewById(R.id.keyboardView);
-//            }
-//            getLocationInWindow(mCoordinates);
-//            mPopupX = popupKey.x + getPaddingLeft();
-//            mPopupY = popupKey.y + getPaddingTop();
-//            mPopupX = mPopupX + popupKey.width - mMiniKeyboardContainer.getMeasuredWidth();
-//            mPopupY = mPopupY - mMiniKeyboardContainer.getMeasuredHeight();
-//            final int x = mPopupX + mMiniKeyboardContainer.getPaddingRight() + mCoordinates[0];
-//            final int y = mPopupY + mMiniKeyboardContainer.getPaddingBottom() + mCoordinates[1];
-//            mMiniKeyboard.setPopupOffset(x < 0 ? 0 : x, y);
-//            mMiniKeyboard.setShifted(isShifted());
-//            mPopupKeyboard.setContentView(mMiniKeyboardContainer);
-//            mPopupKeyboard.setWidth(mMiniKeyboardContainer.getMeasuredWidth());
-//            mPopupKeyboard.setHeight(mMiniKeyboardContainer.getMeasuredHeight());
-//            mPopupKeyboard.showAtLocation(this, Gravity.NO_GRAVITY, x, y);
-//            mMiniKeyboardOnScreen = true;
-//            //mMiniKeyboard.onTouchEvent(getTranslatedEvent(me));
-//            invalidateAllKeys();
+//        Log.d("mytag","values is");
+//        if (popupKey.codes[0] == 'q') {
+//            getOnKeyboardActionListener().onKey('1', null);
 //            return true;
 //        }
-//        return false;
+//       else if (popupKey.codes[0] == 'w') {
+//            getOnKeyboardActionListener().onKey('2', null);
+//            return true;
+//        }
+//        else if (popupKey.codes[0] == 'e') {
+//            getOnKeyboardActionListener().onKey('3', null);
+//            return true;
+//        }
+//        else if (popupKey.codes[0] == 'r') {
+//            getOnKeyboardActionListener().onKey('4', null);
+//            return true;
+//        }
+//        else if (popupKey.codes[0] == 't') {
+//            getOnKeyboardActionListener().onKey('5', null);
+//            return true;
+//        }
+//        else if (popupKey.codes[0] == 'y') {
+//            getOnKeyboardActionListener().onKey('6', null);
+//            return true;
+//        }
+//        else if (popupKey.codes[0] == 'u') {
+//            getOnKeyboardActionListener().onKey('7', null);
+//            return true;
+//        }
+//        else if (popupKey.codes[0] == 'i') {
+//            getOnKeyboardActionListener().onKey('8', null);
+//            return true;
+//        }
+//        else if (popupKey.codes[0] == 'o') {
+//            getOnKeyboardActionListener().onKey('9', null);
+//            return true;
+//        }
+//        else if (popupKey.codes[0] == 'p') {
+//            getOnKeyboardActionListener().onKey('0', null);
+//            return true;
+//        }
+//        return  false;
+
+
+        int popupKeyboardId = popupKey.popupResId;
+        Log.d("mytag","on Long press"+popupKeyboardId);
+        if (popupKeyboardId != 0) {
+            mMiniKeyboardContainer = mMiniKeyboardCache.get(popupKey);
+            if (mMiniKeyboardContainer == null) {
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                mMiniKeyboardContainer = inflater.inflate(mPopupLayout, null);
+                //---=
+                mMiniKeyboard = mMiniKeyboardContainer.findViewById(
+                        R.id.keyboardView);
+                View closeButton = null;
+//                View closeButton = mMiniKeyboardContainer.findViewById(R.id.closeButton);
+//                if (closeButton != null) closeButton.setOnClickListener(this);
+
+                Log.d("mytag","below");
+                mMiniKeyboard.setOnKeyboardActionListener(new OnKeyboardActionListener() {
+                    public void onKey(int primaryCode, int[] keyCodes) {
+                        Log.d("mytag","below--2");
+                        mKeyboardActionListener.onKey(primaryCode, keyCodes);
+                        Log.d("mytag",primaryCode+" my tage");
+                        dismissPopupKeyboard();
+                    }
+
+                    public void onText(CharSequence text) {
+                        mKeyboardActionListener.onText(text);
+                        dismissPopupKeyboard();
+                    }
+
+                    public void swipeLeft() {
+                    }
+
+                    public void swipeRight() {
+                    }
+
+                    public void swipeUp() {
+                    }
+
+                    public void swipeDown() {
+                    }
+
+                    public void onPress(int primaryCode) {
+                        mKeyboardActionListener.onPress(primaryCode);
+                    }
+
+                    public void onRelease(int primaryCode) {
+                        mKeyboardActionListener.onRelease(primaryCode);
+                    }
+                });
+
+                Keyboard keyboard;
+                if (popupKey.popupCharacters != null) {
+                    keyboard = new Keyboard(getContext(), popupKeyboardId,
+                            popupKey.popupCharacters, -1, getPaddingLeft() + getPaddingRight());
+                } else {
+                    keyboard = new Keyboard(getContext(), popupKeyboardId);
+                }
+                mMiniKeyboard.setKeyboard(keyboard);
+                mMiniKeyboard.setPopupParent(this);
+                mMiniKeyboardContainer.measure(
+                        MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.AT_MOST),
+                        MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.AT_MOST));
+
+                mMiniKeyboardCache.put(popupKey, mMiniKeyboardContainer);
+            } else {
+                //---=
+                Log.i("mytag", "onLongPress: else");
+                mMiniKeyboard = mMiniKeyboardContainer.findViewById(R.id.keyboardView);
+            }
+            getLocationInWindow(mCoordinates);
+            mPopupX = popupKey.x + getPaddingLeft();
+            mPopupY = popupKey.y + getPaddingTop();
+            mPopupX = mPopupX + popupKey.width - mMiniKeyboardContainer.getMeasuredWidth();
+            mPopupY = mPopupY - mMiniKeyboardContainer.getMeasuredHeight();
+            final int x = mPopupX + mMiniKeyboardContainer.getPaddingRight() + mCoordinates[0];
+            final int y = mPopupY + mMiniKeyboardContainer.getPaddingBottom() + mCoordinates[1];
+            mMiniKeyboard.setPopupOffset(x < 0 ? 0 : x, y);
+            mMiniKeyboard.setShifted(isShifted());
+            mPopupKeyboard.setContentView(mMiniKeyboardContainer);
+            mPopupKeyboard.setWidth(mMiniKeyboardContainer.getMeasuredWidth());
+            mPopupKeyboard.setHeight(mMiniKeyboardContainer.getMeasuredHeight());
+            mPopupKeyboard.showAtLocation(this, Gravity.NO_GRAVITY, x, y);
+            mMiniKeyboardOnScreen = true;
+            //mMiniKeyboard.onTouchEvent(getTranslatedEvent(me));
+            invalidateAllKeys();
+            return true;
+        }else {
+            Log.d("MyKey", "onLongPress: outer else");
+        }
+        return false;
 
     }
 

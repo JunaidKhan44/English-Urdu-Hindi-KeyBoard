@@ -5,37 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Otherclasses.Background"
+    android:background="@color/backgroundapp"
     >
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
-        android:background="@color/Gray"
+        android:background="@color/buttoncolor"
         android:id="@+id/header"
         >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Custom Keyboard"
+            android:text="Keyboard"
             android:textColor="@color/white"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_marginTop="5dp"
             android:id="@+id/txt"
-            android:fontFamily="@font/montserrat_alternates"/>
+            android:textStyle="normal"
+            android:fontFamily="@font/montserrat"
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="English Urdu"
+            android:text="@string/app_name"
             android:textColor="@color/white"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:id="@+id/txt1"
             android:layout_below="@+id/txt"
             android:layout_marginTop="-2dp"
-            android:fontFamily="@font/montserrat_alternates"
+            android:fontFamily="@font/montserrat"
+
             />
 
 
@@ -47,6 +51,8 @@
         android:layout_below="@+id/header"
         app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
         android:id="@+id/tablayout"
+        android:background="@color/backgroundapp"
+        app:tabTextColor="@color/buttoncolor"
 
         >
 
@@ -55,6 +61,8 @@
             android:layout_height="wrap_content"
             android:text="Gradient"
             android:id="@+id/gradient"
+
+
 
             />
 

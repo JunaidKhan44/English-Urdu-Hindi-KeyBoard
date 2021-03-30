@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.Create_Keyboard1" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/Gray</item>
-        <item name="colorPrimaryVariant">@color/Gray</item>
+        <item name="colorPrimary">@color/buttondark</item>
+        <item name="colorPrimaryVariant">@color/buttondark</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -20,6 +20,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/buttoncolor</item>
     </style>
 
 

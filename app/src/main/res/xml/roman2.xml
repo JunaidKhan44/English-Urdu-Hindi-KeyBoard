@@ -1,6 +1,6 @@
 <Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    app:horizontalGap="3px"
+    app:horizontalGap="0.6%p"
     app:verticalGap="4px"
     app:keyHeight="50dp"
 
@@ -34,17 +34,17 @@
         <Key app:codes="56" app:keyLabel="8" app:keyWidth="15%p"/>
         <Key app:codes="57" app:keyLabel="9" app:keyWidth="15%p"/>
         <Key app:codes="47" app:keyLabel="/"  app:keyWidth="15%p"/>
-        <Key app:codes="-5" app:keyIcon="@drawable/ic_backspace" app:keyEdgeFlags="right" app:keyWidth="15%p"/>
+        <Key app:codes="-5" app:keyIcon="@drawable/ic_backspace" app:keyEdgeFlags="right" app:keyWidth="17%p"/>
     </Row>
 
     <Row app:rowEdgeFlags="bottom">
-        <Key app:codes="0x1111" app:keyLabel="\?ABC" app:keyWidth="15%p"  app:keyEdgeFlags="left"/>
+        <Key app:codes="-61" app:keyLabel="\?ABC" app:keyWidth="15%p"  app:keyEdgeFlags="left"/>
         <Key app:codes="44" app:keyLabel="," app:keyWidth="8%p" />
         <Key app:codes="0x221E" app:keyLabel="!?#" app:keyWidth="15%p" app:isRepeatable="true"/>
         <Key app:codes="48" app:keyLabel="0" app:keyWidth="20%p" app:isRepeatable="true"/>
         <Key app:codes="61" app:keyLabel="=" app:keyWidth="10%p" app:isRepeatable="true"/>
         <Key app:codes="46" app:keyLabel="." app:keyWidth="10%p" app:isRepeatable="true"/>
-        <Key app:codes="-4" app:keyLabel="⏎" app:keyWidth="16%p" app:keyEdgeFlags="right"/>
+        <Key app:codes="-4" app:keyIcon="@drawable/ic_enter" app:keyWidth="17%p" app:keyEdgeFlags="right"/>
     </Row>
 
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Otherclasses.ExitScreen"
-    android:background="@color/Gray">
+    android:background="@color/backgroundapp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -15,19 +15,35 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="2dp"
             android:id="@+id/r1"
-            android:layout_above="@+id/center"
+            android:layout_above="@+id/bottom"
+
             android:gravity="center"
             >
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="wrap_content"
                 android:text="@string/text"
                 android:id="@+id/text"
                 android:textSize="30sp"
                 android:textColor="@color/white"
                 android:textAlignment="center"
-                android:fontFamily="@font/montserrat_alternates"
-                android:gravity="center" />
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/text2"
+                android:id="@+id/text2"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:layout_below="@+id/text"/>
+
+
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -35,9 +51,11 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/backgroundapp"
                 app:cardCornerRadius="20dp"
-                android:layout_below="@+id/text">
+                android:layout_below="@+id/text2"
+                app:strokeColor="@color/buttoncolor"
+                app:strokeWidth="2dp">
 
                 <LinearLayout
                     android:id="@+id/native_ad_container"
@@ -50,8 +68,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Ad is loading.."
-                    android:textColor="@color/black" />
+                    android:text="Ad is loading..."
+                    android:textColor="@color/white" />
 
                 <ProgressBar
                     android:layout_width="20dp"
@@ -64,62 +82,30 @@
             </com.google.android.material.card.MaterialCardView>
 
         </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_above="@+id/bottom"
-            android:id="@+id/center">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="rate us"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:fontFamily="@font/montserrat_alternates"
-                android:id="@+id/rateus"/>
-
-            <RatingBar
-                android:id="@+id/simpleRatingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/rateus"
-                android:progressBackgroundTint="@color/White"
-                android:background="@color/Gray"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:rating="0"
-                />
-
-        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:weightSum="2"
             android:layout_alignParentBottom="true"
             android:id="@+id/bottom"
-            android:layout_marginBottom="15dp">
+            android:layout_marginBottom="50dp"
+            >
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/buttoncolor"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:text="Ok"
-                android:textSize="20sp"
-                android:textColor="@color/black"
+                android:text="Yes"
+                android:textSize="18sp"
+                android:textColor="@color/white"
                 android:id="@+id/yes"
-                android:onClick="exitFun"/>
+                android:onClick="exitFun"
+                />
 
             <Button
                 android:id="@+id/no"
@@ -129,10 +115,10 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="40dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/white"
-                android:text="Cancel"
-                android:textColor="@color/black"
-                android:textSize="20sp"
+                android:backgroundTint="@color/buttoncolor"
+                android:text="No"
+                android:textColor="@color/white"
+                android:textSize="18sp"
                 android:onClick="retainFun"/>
 
 

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Otherclasses.PrivacyPolicy"
+    android:background="@color/backgroundapp" >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pp1"
+        >
+        <TextView
+            android:id="@+id/txt1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy"
+            android:textSize="20dp"
+            android:textColor="@color/buttoncolor"
+            android:textAllCaps="true"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="0dp"
+            android:textAlignment="textStart"
+            android:gravity="start"
+            />
+
+        <TextView
+            android:id="@+id/txt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="-12dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="@font/montserrat"
+            android:gravity="start"
+            android:text="@string/policy"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pp1"
+        android:id="@+id/pp2"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you agree to the"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="-09dp"
+            android:textAlignment="textStart"
+            android:gravity="start"
+            android:id="@+id/txt3"
+            android:textStyle="normal"
+            />
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="below I agree to"-->
+        <!--            android:textSize="20sp"-->
+        <!--            android:textColor="@color/white"-->
+        <!--            android:textAllCaps="false"-->
+        <!--            android:fontFamily="@font/montserrat"-->
+        <!--            android:layout_marginTop="0dp"-->
+        <!--            android:layout_marginLeft="20dp"-->
+        <!--            android:layout_marginRight="20dp"-->
+        <!--            android:layout_marginBottom="-10dp"-->
+        <!--            android:textAlignment="textStart"-->
+        <!--            android:gravity="start"-->
+        <!--            android:id="@+id/txt4"-->
+        <!--            android:layout_below="@+id/txt3"-->
+        <!--            android:textStyle="normal"-->
+        <!--            />-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="terms and conditions."
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montserrat"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="-5dp"
+            android:textAlignment="textStart"
+            android:gravity="start"
+            android:id="@+id/txt5"
+            android:layout_below="@+id/txt3"
+            android:textStyle="normal"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pp3"
+        android:layout_below="@+id/pp2">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/agree"
+            android:layout_marginRight="20dp"
+            android:onClick="movetomain"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pp4"
+        android:layout_below="@+id/pp3"
+        >
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:background="@color/white"
+            android:backgroundTint="@color/backgroundapp"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="3dp"
+            app:strokeColor="@color/buttoncolor">
+
+            <LinearLayout
+                android:id="@+id/native_ad_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ad is loading.."
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:id="@+id/loading"/>
+
+            <ProgressBar
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:outlineAmbientShadowColor="@color/buttoncolor"
+                android:id="@+id/prograssbar"/>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

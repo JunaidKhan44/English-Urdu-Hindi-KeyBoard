@@ -2,50 +2,28 @@ package com.example.create_keyboard1.Otherclasses;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.bluetooth.BluetoothAssignedNumbers;
-import android.content.ActivityNotFoundException;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.inputmethodservice.InputMethodService;
 import android.media.AudioManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Looper;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
-import android.view.inputmethod.InputMethodManager;
-import android.view.textservice.SentenceSuggestionsInfo;
-import android.view.textservice.SpellCheckerSession;
-import android.view.textservice.SuggestionsInfo;
-import android.view.textservice.TextInfo;
-import android.view.textservice.TextServicesManager;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 
 import com.example.create_keyboard1.Fragments.FlagsFrag;
 import com.example.create_keyboard1.Fragments.GradientFrag;
@@ -63,10 +41,8 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -80,7 +56,9 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static androidx.core.app.ActivityCompat.startActivityForResult;
+import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.GROUPSNAME_SHARED_PREF1;
+import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.POSITION_AD1;
+import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.SHARED_PREF_NAME1;
 import static com.example.create_keyboard1.Adapter.MyAdapter.GROUPSNAME_SHARED_PREF;
 import static com.example.create_keyboard1.Adapter.MyAdapter.POSITION_AD;
 import static com.example.create_keyboard1.Adapter.MyAdapter.SHARED_PREF_NAME;
@@ -92,8 +70,8 @@ public class SimpleIME extends InputMethodService
     public static InputConnection ic;
     public boolean flagforemoji = false;
     public static KeyboardView kv;
-    private Keyboard keyboard;
-    SharedPreferences sharedPreferences;
+    public Keyboard keyboard;
+    SharedPreferences sharedPreferences,sharedPreferences1;
     private boolean caps = false;
 
     //new urdu key code---------
@@ -113,8 +91,8 @@ public class SimpleIME extends InputMethodService
     private String uWordSeparators;
     private int mLastDisplayWidth;
     private long mLastShiftTime;
-    private Keyboard symbols;
-    private Keyboard eng_keyboard;
+    private SharedPreferences sharedPreferences2;
+
 
     public String getuWordSeparators() {
         return uWordSeparators;
@@ -127,12 +105,24 @@ public class SimpleIME extends InputMethodService
     public View onCreateInputView() {
         kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard, null);
         flagforemoji = false;
+
+        sharedPreferences2 = getSharedPreferences(SHARED_PREF_NAME1, MODE_PRIVATE);
+        String value1 = sharedPreferences2.getString(GROUPSNAME_SHARED_PREF1, "");
+        int pos1 = sharedPreferences2.getInt(POSITION_AD1 , 0);
+        if(pos1==0){   kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard, null);
+
+        }
+        else if(pos1==1){   kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard2, null);
+
+        }
+        else if(pos1==2){   kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard3, null);
+
+        }
+
         keyboard = new Keyboard(this, R.xml.custom_qwerty);
         kv.setKeyboard(keyboard);
-        kv.setOnKeyboardActionListener(this);
 
         //shared preference code start
-
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         String value = sharedPreferences.getString(GROUPSNAME_SHARED_PREF, "");
         int pos = sharedPreferences.getInt(POSITION_AD, 0);
@@ -152,7 +142,8 @@ public class SimpleIME extends InputMethodService
 
             if (SportsFrag.mysport.size() > 0)
                 kv.setBackgroundResource(SportsFrag.mysport.get(pos).getTheme_image());
-        } else {
+        }
+        else {
             kv.setBackgroundResource(R.drawable.gradient_0);
         }
 
@@ -164,6 +155,7 @@ public class SimpleIME extends InputMethodService
             return false;
         });
 
+        kv.setOnKeyboardActionListener(this);
         return kv;
     }
 
@@ -190,7 +182,6 @@ public class SimpleIME extends InputMethodService
         executor.execute(new Runnable() {
             @Override
             public void run() {
-
                 //Background work here
                 trieCharacters = new TrieCharacters();
                 try {
@@ -210,8 +201,6 @@ public class SimpleIME extends InputMethodService
                 catch (IOException iex) {
                     Logger.getLogger(SimpleIME.class.getName()).log(Level.SEVERE, null, iex);
                 }
-
-
 
                 handler.post(new Runnable() {
                     @Override
@@ -314,32 +303,32 @@ public class SimpleIME extends InputMethodService
                 kv.setKeyboard(keyboard);
                 kv.setOnKeyboardActionListener(this);
                 break;
-            case 0xFF9B:
+            case -63:
                 keyboard = new Keyboard(this, R.xml.hindi2);
                 kv.setKeyboard(keyboard);
                 kv.setOnKeyboardActionListener(this);
                 break;
-            case 0x3145:
+            case -64:
                 keyboard = new Keyboard(this, R.xml.hindi3);
                 kv.setKeyboard(keyboard);
                 kv.setOnKeyboardActionListener(this);
                 break;
-            case 0x0D26:
+            case -65:
                 keyboard = new Keyboard(this, R.xml.hindi1);
                 kv.setKeyboard(keyboard);
                 kv.setOnKeyboardActionListener(this);
                 break;
-            case 0x1557:
+            case -6:
                 keyboard = new Keyboard(this, R.xml.roman);
                 kv.setKeyboard(keyboard);
                 kv.setOnKeyboardActionListener(this);
                 break;
-            case 0xFE70:
+            case -62:
                 keyboard = new Keyboard(this, R.xml.urdu_numeric);
                 kv.setKeyboard(keyboard);
                 kv.setOnKeyboardActionListener(this);
                 break;
-            case 0x1111:
+            case -61:
                 keyboard = new Keyboard(this, R.xml.custom_qwerty);
                 kv.setKeyboard(keyboard);
                 kv.setOnKeyboardActionListener(this);
@@ -403,7 +392,7 @@ public class SimpleIME extends InputMethodService
 
                 break;
             case 0x070A:
-//                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(this, SettingActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -440,7 +429,10 @@ public class SimpleIME extends InputMethodService
 //                    if (Character.isLetter(code) && caps) {
 //                        code = Character.toUpperCase(code);
 //                    }
-//                //    ic.commitText(String.valueOf(code), 1);
+//                 ic.commitText(String.valueOf(code), 1);
+
+                    Log.d("mytag","key pop up"+primaryCode);
+
                 }
 
         }
@@ -450,43 +442,15 @@ public class SimpleIME extends InputMethodService
             // Handle separator
             if (mComposing.length() > 0) {
                 previousWord=mComposing.toString();
+                Log.d("mytag","isWordSeparator :"+mComposing);
                 commitTyped(getCurrentInputConnection());
             }
             sendKey(primaryCode);
         }
-        playClick(primaryCode);
-        if (primaryCode == android.inputmethodservice.Keyboard.KEYCODE_DELETE) {
-            handleBackspace();
-
-        } else if (primaryCode == android.inputmethodservice.Keyboard.KEYCODE_SHIFT) {
-            handleShift();
-        } else if (primaryCode == android.inputmethodservice.Keyboard.KEYCODE_DONE) {
-            handleClose();
-        }
-        else if (primaryCode == Keyboard.KEYCODE_MODE_CHANGE) {
-            Keyboard current = kv.getKeyboard();
-            if (current == symbols) {
-                current = keyboard;
-            } else {
-                current = symbols;
-            }
-            kv.setKeyboard(current);
-            if (current == symbols) {
-                current.setShifted(false);
-            }
-        }
-        else if (primaryCode == -6) {
-            Keyboard current = kv.getKeyboard();
-            if (current == eng_keyboard) {
-                current = keyboard;
-            } else {
-                current = eng_keyboard;
-            }
-            kv.setKeyboard(current);
-        }
         else {
             handleCharacter(primaryCode, keyCodes);
-
+            Log.d("mytag","isWordSeparator + handleCharacter :"+mComposing);
+         //   Log.d("mytag","key pop up"+primaryCode);
         }
 
 
@@ -530,7 +494,8 @@ public class SimpleIME extends InputMethodService
                 // composing text for the user, we want to modify that instead
                 // of let the application to the delete itself.
                 if (mComposing.length() > 0) {
-                    onKey(android.inputmethodservice.Keyboard.KEYCODE_DELETE, null);
+                    onKey(Keyboard.KEYCODE_DELETE, null);
+                    Log.d("mytag","KeyEvent.KEYCODE_DEL :"+mComposing);
                     return true;
                 }
                 break;
@@ -684,6 +649,7 @@ public class SimpleIME extends InputMethodService
         requestHideSelf(0);
         mComposing = new StringBuilder();
         setSuggestions(null, false, false);
+        Log.d("mytag","handleClose :"+mComposing);
         updateCandidates();
         kv.closing();
     }
@@ -698,10 +664,13 @@ public class SimpleIME extends InputMethodService
         }
 
         if (isAlphabet(primaryCode) && mPredictionOn) {
+
+            Log.d("mytag","isAlphabet : "+mComposing);
             mComposing.append((char) primaryCode);
             getCurrentInputConnection().setComposingText(mComposing, 1);
-            updateShiftKeyState(getCurrentInputEditorInfo());
+            Log.d("mytag","isAlphabet : "+mComposing);
             updateCandidates();
+//            mComposing.setLength(0);
         }
     }
 
@@ -710,56 +679,25 @@ public class SimpleIME extends InputMethodService
             return;
         }
 
-//        Keyboard currentKeyboard = kv.getKeyboard();
-//        if (eng_keyboard == currentKeyboard) {
-//            // Alphabet keyboard
-//            checkToggleCapsLock();
-//            kv.setShifted(mCapsLock || !kv.isShifted());
-//        }
-        /* else if (currentKeyboard == mSymbolsKeyboard) {
-            mSymbolsKeyboard.setShifted(true);
-            mInputView.setKeyboard(mSymbolsShiftedKeyboard);
-            mSymbolsShiftedKeyboard.setShifted(true);
-        } else if (currentKeyboard == mSymbolsShiftedKeyboard) {
-            mSymbolsShiftedKeyboard.setShifted(false);
-            mInputView.setKeyboard(mSymbolsKeyboard);
-            mSymbolsKeyboard.setShifted(false);
-        }*/
-    }
-
-    private void checkToggleCapsLock() {
-        long now = System.currentTimeMillis();
-        if (mLastShiftTime + 800 > now) {
-            mCapsLock = !mCapsLock;
-            mLastShiftTime = 0;
-        } else {
-            mLastShiftTime = now;
-        }
     }
 
 
-    private void updateShiftKeyState(EditorInfo attr) {
-//        if (attr != null && kv != null && eng_keyboard == kv.getKeyboard()) {
-//            int caps = 0;
-//            EditorInfo ei = getCurrentInputEditorInfo();
-//            if (ei != null && ei.inputType != EditorInfo.TYPE_NULL) {
-//                caps = getCurrentInputConnection().getCursorCapsMode(attr.inputType);
-//            }
-//            kv.setShifted(mCapsLock || caps != 0);
-//        }
-    }
+
 
     private void handleBackspace() {
         final int length = mComposing.length();
         if (length > 1) {
             mComposing.delete(length - 1, length);
+            mComposing.setLength(0);
             setSuggestions(null, false, false);
             getCurrentInputConnection().setComposingText(mComposing, 1);
+            Log.d("mytag","handleBackspace 1: "+mComposing);
             updateCandidates();
         } else if (length > 0) {
             mComposing.setLength(0);
             setSuggestions(null, false, false);
             getCurrentInputConnection().commitText("", 0);
+            Log.d("mytag","handleBackspace 2: "+mComposing);
             updateCandidates();
 
 
@@ -767,6 +705,7 @@ public class SimpleIME extends InputMethodService
 
             mComposing.setLength(0);
             setSuggestions(null, false, false);
+            Log.d("mytag","handleBackspace 3: "+mComposing);
             try{
                 checkForCompose();
             }
@@ -786,6 +725,7 @@ public class SimpleIME extends InputMethodService
         Log.v("String", backWord);
         mComposing.setLength(0);
         mComposing.append(backWord);
+        Log.d("mytag","checkForCompose :"+mComposing);
         getCurrentInputConnection().setComposingText(backWord, 1);
 
     }
@@ -818,11 +758,11 @@ public class SimpleIME extends InputMethodService
             case 32:
                 am.playSoundEffect(AudioManager.FX_KEYPRESS_SPACEBAR);
                 break;
-            case android.inputmethodservice.Keyboard.KEYCODE_DONE:
+            case Keyboard.KEYCODE_DONE:
             case 10:
                 am.playSoundEffect(AudioManager.FX_KEYPRESS_RETURN);
                 break;
-            case android.inputmethodservice.Keyboard.KEYCODE_DELETE:
+            case Keyboard.KEYCODE_DELETE:
                 am.playSoundEffect(AudioManager.FX_KEYPRESS_DELETE);
                 break;
             default: am.playSoundEffect(AudioManager.FX_KEYPRESS_STANDARD);
@@ -865,13 +805,14 @@ public class SimpleIME extends InputMethodService
             if (mComposing.length() > 0) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(mComposing.toString());
+                Log.d("mytag","updateCandidates :"+mComposing);
                 setSuggestions(list, true, true);
             } else if(previousWord!=null){
                 if(!previousWord.equals("")) {
                     ArrayList<String> list = new ArrayList<String>();
                     list.add(previousWord.trim());
-
                     setSuggestions(list, true, true);
+
                 }
             }else{
                 setSuggestions(null, false, false);
@@ -914,6 +855,7 @@ public class SimpleIME extends InputMethodService
         } else if (mComposing.length() > 0) {
             mComposing = new StringBuilder();
             mComposing.append(fromDictionary.get(index)+" ");
+            Log.d("mytag","pickSuggestionManually1 :"+mComposing);
 
             commitTyped(getCurrentInputConnection());
         }else if(!previousWord.equals("")){
@@ -921,6 +863,7 @@ public class SimpleIME extends InputMethodService
                 mComposing = new StringBuilder();
                 mComposing.append(nextWord.get(index) + " ");
                 previousWord = mComposing.toString().trim();
+                Log.d("mytag","pickSuggestionManually2 :"+mComposing);
                 commitTyped(getCurrentInputConnection());
             }
             catch (Exception e)
@@ -934,7 +877,7 @@ public class SimpleIME extends InputMethodService
         if (mComposing.length() > 0) {
             previousWord = mComposing.toString().trim();
             inputConnection.commitText(mComposing, mComposing.length());
-
+            Log.d("mytag","commitTyped :"+mComposing);
             mComposing.setLength(0);
             updateCandidates();
         }
@@ -1021,31 +964,28 @@ public class SimpleIME extends InputMethodService
         return nextWord;
     }
 
-
-
-
-
-
-//    private void playClick(int keyCode) {
-//        AudioManager am = (AudioManager) getSystemService(AUDIO_SERVICE);
-//        switch (keyCode) {
-//            case 113:
-//                am.playSoundEffect(AudioManager.FX_KEYPRESS_SPACEBAR);
-//                break;
-//            case Keyboard.KEYCODE_DONE:
-//            case 10:
-//                am.playSoundEffect(AudioManager.FX_KEYPRESS_RETURN);
-//                break;
-//            case Keyboard.KEYCODE_DELETE:
-//                am.playSoundEffect(AudioManager.FX_KEYPRESS_DELETE);
-//                break;
-//
-//            default:
-//                am.playSoundEffect(AudioManager.FX_KEYPRESS_STANDARD);
-//        }
-//    }
     @Override
     public void onStartInputView(EditorInfo info, boolean restarting) {
+
+//
+//        sharedPreferences2 = getSharedPreferences(SHARED_PREF_NAME1, MODE_PRIVATE);
+//        String value1 = sharedPreferences2.getString(GROUPSNAME_SHARED_PREF1, "");
+//        int pos1 = sharedPreferences2.getInt(POSITION_AD1 , 0);
+//
+//        if(pos1==0){   kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard, null);
+//            Toast.makeText(context, "pos "+pos1, Toast.LENGTH_SHORT).show();
+//        }
+//        else if(pos1==1){   kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard2, null);
+//            Toast.makeText(context, "pos "+pos1, Toast.LENGTH_SHORT).show();
+//        }
+//        else if(pos1==2){   kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard3, null);
+//            Toast.makeText(context, "pos "+pos1, Toast.LENGTH_SHORT).show();
+//        }
+//
+
+
+        // Toast.makeText(context, "onStart "+value1+" "+pos1, Toast.LENGTH_SHORT).show();
+       //------------------------------------------------------------------
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         String value = sharedPreferences.getString(GROUPSNAME_SHARED_PREF, "");
         int pos = sharedPreferences.getInt(POSITION_AD, 0);
@@ -1074,7 +1014,6 @@ public class SimpleIME extends InputMethodService
         super.onStartInputView(info, restarting);
     }
     void speechToText() {
-        kv.setVisibility(View.INVISIBLE);
         Toast.makeText(this, "Listening...", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -1100,7 +1039,7 @@ public class SimpleIME extends InputMethodService
 //                    }
                     ic.commitText(voiceResults.get(0), 1);
                     Log.i("tag", voiceResults.get(0));
-                    kv.setVisibility(View.VISIBLE);
+//                    kv.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -1147,6 +1086,7 @@ public class SimpleIME extends InputMethodService
             public void onEndOfSpeech() {
                 // TODO Auto-generated method stub
                 Log.i("tag", "onEndOfSpeech");
+
 
             }
 
