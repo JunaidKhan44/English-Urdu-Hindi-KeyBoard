@@ -11,9 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        app:strokeColor="@color/black"
+        app:strokeColor="@color/white"
         app:strokeWidth="2dp"
         android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/backgroundapp"
         >
 
         <RelativeLayout
@@ -29,7 +30,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
-                android:background="@color/RoyalBlue"
+                android:background="@color/buttoncolor"
                 android:fontFamily="@font/montserrat_alternates"
                 android:gravity="center"
                 android:text="Theme: 1"
@@ -55,7 +56,7 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:backgroundTint="@color/RoyalBlue"
+                android:backgroundTint="@color/buttoncolor"
                 android:text="Apply"
                 android:textColor="@color/white"
                 android:textStyle="bold"

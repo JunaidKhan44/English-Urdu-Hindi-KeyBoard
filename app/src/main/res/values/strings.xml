@@ -30,4 +30,20 @@
     <string name="FbNativeAd">IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID</string>
 
 
+    <!-- Labels on soft keys -->
+    <string name="label_go_key">Go</string>
+    <string name="label_next_key">Next</string>
+    <string name="label_send_key">Send</string>
+
+
+    <!-- Database strings -->
+    <string name="database_name">database.sqlite</string>
+    <string name="en_table_name">en_table</string>
+    <string name="pa_table_name">pa_table</string>
+    <string name="fa_table_name">fa_table</string>
+    <string name="freq_column">freq</string>
+    <string name="word_column">word</string>
+
+
+
 </resources>

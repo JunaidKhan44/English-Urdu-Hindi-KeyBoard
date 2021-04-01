@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -22,10 +23,15 @@ import android.widget.Toast;
 import com.example.create_keyboard1.R;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
+import com.facebook.ads.AudienceNetworkAds;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 import com.facebook.ads.NativeAdListener;
 import com.facebook.ads.NativeAdViewAttributes;
 import com.facebook.ads.NativeBannerAd;
 import com.facebook.ads.NativeBannerAdView;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.onesignal.OneSignal;
 
 import org.w3c.dom.Text;
 
@@ -39,7 +45,17 @@ public class MainMenu extends AppCompatActivity {
     public ImageView  imgpop;
     private NativeBannerAd mNativeBannerAd;
     TextView  loadingtxt;
+    private InterstitialAd interstitialAd;
+    private InterstitialAd interstitialAdtheme;
+    private InterstitialAd interstitialAdinstruction;
+    private InterstitialAd interstitialAdback;
 
+
+    //one signal id
+    private static final String ONESIGNAL_APP_ID = "2bf001bd-f827-4168-a82c-23db658f5415";
+
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +64,40 @@ public class MainMenu extends AppCompatActivity {
         getSupportActionBar().hide();
 
 
+        //analytics
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "1");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "MainMenu");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+
+
+
+
+        //one signal
+        // Enable verbose OneSignal logging to debug issues if needed.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+        // OneSignal Initialization
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(ONESIGNAL_APP_ID);
+        //one signal
+
 
         loadingtxt=findViewById(R.id.loadtxt);
         imgpop=findViewById(R.id.popupmenu);
-        bannerNative();
+
+
+        if (!AppPurchase.checkpurchases()) {
+            bannerNative();
+            callinterstitial();
+            callinterstitialtheme();
+            callinterstitialinstruction();
+            callinterstitialbackpressed();
+        }
+
+
         imgpop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,23 +197,49 @@ public class MainMenu extends AppCompatActivity {
     }
 
     public void showbackground(View view) {
-        startActivity(new Intent(getApplicationContext(),Background.class));
+
+        if (interstitialAd != null && interstitialAd.isAdLoaded()) {
+            interstitialAd.show();
+        } else {
+            Log.e("mytag", "Interstitial ad dismissed.");
+            startActivity(new Intent(getApplicationContext(),Background.class));
+        }
     }
 
     @Override
     public void onBackPressed() {
 
-        startActivity(new Intent(getApplicationContext(),ExitScreen.class));
-        finish();
+        if (interstitialAdback != null && interstitialAdback.isAdLoaded()) {
+            interstitialAdback.show();
+        } else {
+            Log.e("mytag", "Interstitial ad dismissed.");
+            startActivity(new Intent(getApplicationContext(),ExitScreen.class));
+            finish();
+        }
+
     }
 
     public void openthemeactivity(View view) {
 
-        startActivity(new Intent(getApplicationContext(),KeyboardThemeActivity.class));
+
+        if (interstitialAdtheme != null && interstitialAdtheme.isAdLoaded()) {
+            interstitialAdtheme.show();
+        } else {
+            Log.e("mytag", "Interstitial ad dismissed.");
+            startActivity(new Intent(getApplicationContext(),KeyboardThemeActivity.class));
+        }
+
     }
 
     public void instructionscreenfun(View view) {
-        startActivity(new Intent(getApplicationContext(),InstructionScreenS.class));
+
+        if (interstitialAdinstruction != null && interstitialAdinstruction.isAdLoaded()) {
+            interstitialAdinstruction.show();
+        } else {
+            Log.e("mytag", "Interstitial ad dismissed.");
+            startActivity(new Intent(getApplicationContext(),InstructionScreenS.class));
+        }
+
     }
 
 
@@ -224,6 +296,265 @@ public class MainMenu extends AppCompatActivity {
 
 
 
+    void callinterstitial(){
+
+        //ads
+        AudienceNetworkAds.initialize(this);
+
+        interstitialAd = new InterstitialAd(this, getResources().getString(R.string.FbInterstitialAd));
+        // Create listeners for the Interstitial Ad
+        InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+                // Interstitial ad displayed callback
+                Log.e("mytag", "Interstitial ad displayed.");
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+
+                // Interstitial dismissed callback
+                Log.e("mytag", "Interstitial ad dismissed.");
+                Intent it = new Intent(MainMenu.this, Background.class);
+                startActivity(it);
+
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Log.e("mytag", "Interstitial ad failed to load: " + adError.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Interstitial ad is loaded and ready to be displayed
+                Log.d("mytag", "Interstitial ad is loaded and ready to be displayed!");
+                // Show the ad
+                //  interstitialAd.show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+                Log.d("mytag", "Interstitial ad clicked!");
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+                Log.d("mytag", "Interstitial ad impression logged!");
+            }
+        };
+
+        // For auto play video ads, it's recommended to load the ad
+        // at least 30 seconds before it is shown
+        interstitialAd.loadAd(
+                interstitialAd.buildLoadAdConfig()
+                        .withAdListener(interstitialAdListener)
+                        .build());
+
+
+
+    }
+    void callinterstitialtheme() {
+        //ads
+        AudienceNetworkAds.initialize(this);
+        //interstitialAd = new InterstitialAd(this, "#YOUR_PLACEMENT_ID");
+        interstitialAdtheme = new InterstitialAd(this, getResources().getString(R.string.FbInterstitialAd));
+        // Create listeners for the Interstitial Ad
+        InterstitialAdListener interstitialAdListener2 = new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+                // Interstitial ad displayed callback
+                Log.e("mytag", "Interstitial ad displayed.");
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+
+                // Interstitial dismissed callback
+                Log.e("mytag", "Interstitial ad dismissed.");
+                startActivity(new Intent(getApplicationContext(),KeyboardThemeActivity.class));
+
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Log.e("mytag", "Interstitial ad failed to load: " + adError.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Interstitial ad is loaded and ready to be displayed
+                Log.d("mytag", "Interstitial ad is loaded and ready to be displayed!");
+                // Show the ad
+
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+                Log.d("mytag", "Interstitial ad clicked!");
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+                Log.d("mytag", "Interstitial ad impression logged!");
+            }
+        };
+
+        // For auto play video ads, it's recommended to load the ad
+        // at least 30 seconds before it is shown
+        interstitialAdtheme.loadAd(
+                interstitialAdtheme.buildLoadAdConfig()
+                        .withAdListener(interstitialAdListener2)
+                        .build());
+
+    }
+    void callinterstitialinstruction() {
+        //ads
+        AudienceNetworkAds.initialize(this);
+
+        interstitialAdinstruction = new InterstitialAd(this, getResources().getString(R.string.FbInterstitialAd));
+        // Create listeners for the Interstitial Ad
+        InterstitialAdListener interstitialAdListener2 = new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+                // Interstitial ad displayed callback
+                Log.e("mytag", "Interstitial ad displayed.");
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+
+                // Interstitial dismissed callback
+                Log.e("mytag", "Interstitial ad dismissed.");
+                startActivity(new Intent(getApplicationContext(),InstructionScreenS.class));
+
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Log.e("mytag", "Interstitial ad failed to load: " + adError.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Interstitial ad is loaded and ready to be displayed
+                Log.d("mytag", "Interstitial ad is loaded and ready to be displayed!");
+                // Show the ad
+
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+                Log.d("mytag", "Interstitial ad clicked!");
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+                Log.d("mytag", "Interstitial ad impression logged!");
+            }
+        };
+
+        // For auto play video ads, it's recommended to load the ad
+        // at least 30 seconds before it is shown
+        interstitialAdinstruction.loadAd(
+                interstitialAdinstruction.buildLoadAdConfig()
+                        .withAdListener(interstitialAdListener2)
+                        .build());
+
+    }
+    void callinterstitialbackpressed() {
+        //ads
+        AudienceNetworkAds.initialize(this);
+
+        interstitialAdback = new InterstitialAd(this, getResources().getString(R.string.FbInterstitialAd));
+        // Create listeners for the Interstitial Ad
+        InterstitialAdListener interstitialAdListener3 = new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+                // Interstitial ad displayed callback
+                Log.e("mytag", "Interstitial ad displayed.");
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+
+                // Interstitial dismissed callback
+                Log.e("mytag", "Interstitial ad dismissed.");
+                startActivity(new Intent(getApplicationContext(),ExitScreen.class));
+
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Log.e("mytag", "Interstitial ad failed to load: " + adError.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Interstitial ad is loaded and ready to be displayed
+                Log.d("mytag", "Interstitial ad is loaded and ready to be displayed!");
+                // Show the ad
+
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+                Log.d("mytag", "Interstitial ad clicked!");
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+                Log.d("mytag", "Interstitial ad impression logged!");
+            }
+        };
+
+        // For auto play video ads, it's recommended to load the ad
+        // at least 30 seconds before it is shown
+        interstitialAdback.loadAd(
+                interstitialAdback.buildLoadAdConfig()
+                        .withAdListener(interstitialAdListener3)
+                        .build());
+
+    }
+
+
+
+    @Override
+    protected void onDestroy() {
+        if (interstitialAd != null) {
+            interstitialAd.destroy();
+        }
+        if (interstitialAdtheme != null) {
+            interstitialAdtheme.destroy();
+        }
+        if (interstitialAdinstruction != null) {
+            interstitialAdinstruction.destroy();
+        }
+        if(interstitialAdback!=null){
+            interstitialAdback.destroy();
+        }
+        super.onDestroy();
+    }
 
 
 }

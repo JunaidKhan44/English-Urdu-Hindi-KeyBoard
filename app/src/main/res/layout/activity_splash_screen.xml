@@ -71,7 +71,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/nextbtn"
             android:layout_below="@+id/spl"
-
+            android:visibility="invisible"
+            android:id="@+id/nextbtn"
             />
 
     </RelativeLayout>

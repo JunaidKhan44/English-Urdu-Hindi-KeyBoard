@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "232041163217",
+    "project_id": "custom-keyboard-8ca45",
+    "storage_bucket": "custom-keyboard-8ca45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232041163217:android:cc000a196844a4634418f0",
+        "android_client_info": {
+          "package_name": "com.example.create_keyboard1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232041163217-22ju9i62r1faoq3r41j44va9mbrakgf2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHozDKgSZczPrL2JgrkdoBNSO8mxnY4MY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232041163217-22ju9i62r1faoq3r41j44va9mbrakgf2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

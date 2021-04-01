@@ -19,9 +19,7 @@ import java.util.List;
 
 
 public class CandidateView extends View {
-
     private static final int OUT_OF_BOUNDS = -1;
-
     private SimpleIME mService;
     private List<String> mSuggestions;
     private int mSelectedIndex;
@@ -30,17 +28,14 @@ public class CandidateView extends View {
     private boolean mTypedWordValid;
 
     private Rect mBgPadding;
-
-    private static final int MAX_SUGGESTIONS = 32;
+    private static final int MAX_SUGGESTIONS = 10;
     private static final int SCROLL_PIXELS = 20;
 
     private int[] mWordWidth = new int[MAX_SUGGESTIONS];
     private int[] mWordX = new int[MAX_SUGGESTIONS];
-
     private static final int X_GAP = 10;
 
     private static final List<String> EMPTY_LIST = new ArrayList<String>();
-
     private int mColorNormal;
     private int mColorRecommended;
     private int mColorOther;
@@ -50,20 +45,21 @@ public class CandidateView extends View {
     private int mTargetScrollX;
 
     private int mTotalWidth;
+    private final int extraHeight = 25;
 
     private GestureDetector mGestureDetector;
 
-
-
     /**
      * Construct a CandidateView for showing suggested words for completion.
+     *
      * @param context
      */
     public CandidateView(Context context) {
         super(context);
+
         mSelectionHighlight = context.getResources().getDrawable(
                 android.R.drawable.list_selector_background);
-        mSelectionHighlight.setState(new int[] {
+        mSelectionHighlight.setState(new int[]{
                 android.R.attr.state_enabled,
                 android.R.attr.state_focused,
                 android.R.attr.state_window_focused,
@@ -112,10 +108,11 @@ public class CandidateView extends View {
 
     /**
      * A connection back to the service to communicate with the text field
+     *
      * @param listener
      */
     public void setService(SimpleIME listener) {
-        mService =  listener;
+        mService = listener;
     }
 
     @Override
@@ -131,8 +128,8 @@ public class CandidateView extends View {
         // not have a divider below)
         Rect padding = new Rect();
         mSelectionHighlight.getPadding(padding);
-        final int desiredHeight = ((int)mPaint.getTextSize()) + mVerticalPadding
-                + padding.top + padding.bottom;
+        final int desiredHeight = ((int) mPaint.getTextSize()) + mVerticalPadding
+                + padding.top + padding.bottom + extraHeight;
 
         // Maximum possible width and desired height
         setMeasuredDimension(measuredWidth,
@@ -167,12 +164,14 @@ public class CandidateView extends View {
         final boolean scrolled = mScrolled;
         final boolean typedWordValid = mTypedWordValid;
         final int y = (int) (((height - mPaint.getTextSize()) / 2) - mPaint.ascent());
-
         for (int i = 0; i < count; i++) {
+            // Break the loop. This fix the app from crashing.
+            if(i >= MAX_SUGGESTIONS){
+                break;
+            }
             String suggestion = mSuggestions.get(i);
             float textWidth = paint.measureText(suggestion);
             final int wordWidth = (int) textWidth + X_GAP * 2;
-            for(int ii=0; ii>mSuggestions.size(); ii++)
             mWordX[i] = x;
             mWordWidth[i] = wordWidth;
             paint.setColor(mColorNormal);
@@ -185,7 +184,6 @@ public class CandidateView extends View {
                 }
                 mSelectedIndex = i;
             }
-
             if (canvas != null) {
                 if ((i == 1 && !typedWordValid) || (i == 0 && typedWordValid)) {
                     paint.setFakeBoldText(true);
@@ -193,6 +191,7 @@ public class CandidateView extends View {
                 } else if (i != 0) {
                     paint.setColor(mColorOther);
                 }
+
                 canvas.drawText(suggestion, x + X_GAP, y, paint);
                 paint.setColor(mColorOther);
                 canvas.drawLine(x + wordWidth + 0.5f, bgPadding.top,
@@ -251,16 +250,13 @@ public class CandidateView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent me) {
-
         if (mGestureDetector.onTouchEvent(me)) {
             return true;
         }
-
         int action = me.getAction();
         int x = (int) me.getX();
         int y = (int) me.getY();
         mTouchX = x;
-
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 mScrolled = false;
@@ -293,6 +289,7 @@ public class CandidateView extends View {
     /**
      * For flick through from keyboard, call this method with the x coordinate of the flick
      * gesture.
+     *
      * @param x
      */
     @SuppressLint("WrongCall")

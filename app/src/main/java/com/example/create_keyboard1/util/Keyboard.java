@@ -65,6 +65,7 @@ import java.util.StringTokenizer;
 public class Keyboard {
 
     static final String TAG = "Keyboard";
+    private Key mEnterKey;
 
     // Keyboard XML Tags
     private static final String TAG_KEYBOARD = "Keyboard";
@@ -185,6 +186,36 @@ public class Keyboard {
 
     private ArrayList<Keyboard.Row> rows = new ArrayList<Row>();
 
+    public void setImeOptions(Resources res, int options) {
+        if (mEnterKey == null) {
+            return;
+        }
+        switch (options&(EditorInfo.IME_MASK_ACTION|EditorInfo.IME_FLAG_NO_ENTER_ACTION)) {
+            case EditorInfo.IME_ACTION_GO:
+                mEnterKey.iconPreview = null;
+                mEnterKey.icon = null;
+                mEnterKey.label = res.getText(R.string.label_go_key);
+                break;
+            case EditorInfo.IME_ACTION_NEXT:
+                mEnterKey.iconPreview = null;
+                mEnterKey.icon = null;
+                mEnterKey.label = res.getText(R.string.label_next_key);
+                break;
+            case EditorInfo.IME_ACTION_SEARCH:
+                mEnterKey.icon = res.getDrawable(R.drawable.ic_baseline_search_24);
+                mEnterKey.label = null;
+                break;
+            case EditorInfo.IME_ACTION_SEND:
+                mEnterKey.iconPreview = null;
+                mEnterKey.icon = null;
+                mEnterKey.label = res.getText(R.string.label_send_key);
+                break;
+            default:
+                mEnterKey.icon = res.getDrawable(R.drawable.ic_baseline_check_24);
+                mEnterKey.label = null;
+                break;
+        }
+    }
     /**
      * Container for keys in the keyboard. All keys in a row are at the same Y-coordinate.
      * Some of the key size defaults can be overridden per row from what the {@link Keyboard}

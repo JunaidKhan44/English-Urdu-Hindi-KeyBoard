@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.create_keyboard1.R;
 import com.facebook.ads.Ad;
@@ -19,6 +20,7 @@ import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdListener;
 import com.facebook.ads.NativeAdView;
 import com.facebook.ads.NativeAdViewAttributes;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -27,6 +29,7 @@ public class ExitScreen extends AppCompatActivity {
     private NativeAd nativeAd;
     TextView loading;
     ProgressBar progressBar;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +37,31 @@ public class ExitScreen extends AppCompatActivity {
         setContentView(R.layout.activity_exit_screen);
         getSupportActionBar().hide();
 
+
+
+        //analytics
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "5");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Exit");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+
         loading=findViewById(R.id.loading);
         progressBar=findViewById(R.id.prograssbar);
-        NativeAds();
+
+
+        if(!AppPurchase.checkpurchases()){
+            NativeAds();
+        }
 
     }
 
     public void exitFun(View view) {
 
+        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+        finish();
         System.exit(0);
         finishAffinity();
     }

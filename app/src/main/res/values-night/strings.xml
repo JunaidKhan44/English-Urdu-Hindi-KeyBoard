@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="text">Please Confirm to Exit?</string>
+
         <string name="app_name">English-اردو-Hindi</string>
         <string name="subtype_en_US">English (US)</string>
         <string name="word_separators">\u000a\u0020.,;:!?\n()[]*#\'\"%&amp;$@{}/&lt;&gt;_-+=|&quot;1234567890</string>
@@ -9,6 +9,6 @@
 
     <string name="privacy"><![CDATA[ Privacy &]]></string>
     <string name="policy"> Policy</string>
-    <string name="text2">Exit?</string>
+
 
 </resources>

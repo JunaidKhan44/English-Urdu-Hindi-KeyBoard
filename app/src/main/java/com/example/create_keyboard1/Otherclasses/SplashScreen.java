@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -14,6 +16,8 @@ import com.example.create_keyboard1.R;
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdError;
 import com.facebook.ads.AudienceNetworkAds;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdBase;
 import com.facebook.ads.NativeAdListener;
@@ -27,6 +31,7 @@ public class SplashScreen extends AppCompatActivity {
     private NativeAd nativeAd;
     TextView  loading;
     ProgressBar progressBar;
+    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +40,49 @@ public class SplashScreen extends AppCompatActivity {
         getSupportActionBar().hide();
         loading=findViewById(R.id.loading);
         progressBar=findViewById(R.id.prograssbar);
-        NativeAds();
+
+        try {
+            AppPurchase.runfirst(SplashScreen.this);
+        } catch (Exception e) {
+        }
+
+
+
+        if (!AppPurchase.checkpurchases()) {
+            NativeAds();
+            callinterstitial();
+
+        }
+
+
+
+        Handler handler1=new Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                findViewById(R.id.nextbtn).setVisibility(View.VISIBLE);
+
+            }
+        },6000);
+
+
+
+
     }
 
     public void nextactivity(View view) {
       //  startActivity(new Intent(getApplicationContext(),MainMenu.class));
-        startActivity(new Intent(getApplicationContext(),PrivacyPolicy.class));
-        finish();
+
+        if (interstitialAd != null && interstitialAd.isAdLoaded()) {
+            interstitialAd.show();
+        } else {
+            Log.e("mytag", "Interstitial ad dismissed.");
+            startActivity(new Intent(getApplicationContext(), PrivacyPolicy.class));
+            finish();
+        }
+
+
     }
 
 
@@ -96,5 +137,82 @@ public class SplashScreen extends AppCompatActivity {
                         .build());
 
     }
+
+
+
+
+    public  void callinterstitial(){
+
+        //ads
+        AudienceNetworkAds.initialize(this);
+
+        interstitialAd = new InterstitialAd(this, getResources().getString(R.string.FbInterstitialAd));
+        // Create listeners for the Interstitial Ad
+        InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+
+                // Interstitial ad displayed callback
+                Log.e("mytag", "Interstitial ad displayed.");
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+
+                // Interstitial dismissed callback
+                Log.e("mytag", "Interstitial ad dismissed.");
+                Intent it = new Intent(SplashScreen.this, PrivacyPolicy.class);
+                startActivity(it);
+                finish();
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Log.e("mytag", "Interstitial ad failed to load: " + adError.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Interstitial ad is loaded and ready to be displayed
+                Log.d("mytag", "Interstitial ad is loaded and ready to be displayed!");
+                // Show the ad
+                //  interstitialAd.show();
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+                Log.d("mytag", "Interstitial ad clicked!");
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+                Log.d("mytag", "Interstitial ad impression logged!");
+            }
+        };
+
+        // For auto play video ads, it's recommended to load the ad
+        // at least 30 seconds before it is shown
+        interstitialAd.loadAd(
+                interstitialAd.buildLoadAdConfig()
+                        .withAdListener(interstitialAdListener)
+                        .build());
+
+
+
+    }
+    @Override
+    protected void onDestroy() {
+        if (interstitialAd != null) {
+            interstitialAd.destroy();
+        }
+        super.onDestroy();
+    }
+
+
+
 
 }

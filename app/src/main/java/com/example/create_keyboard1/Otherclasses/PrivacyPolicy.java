@@ -49,7 +49,10 @@ public class PrivacyPolicy extends AppCompatActivity {
         progressBar=findViewById(R.id.prograssbar);
         txt5 = findViewById(R.id.txt5);
 
+        if (!AppPurchase.checkpurchases()) {
         NativeAds();
+        }
+
 
 
         SpannableString ss = new SpannableString("terms and conditions");
