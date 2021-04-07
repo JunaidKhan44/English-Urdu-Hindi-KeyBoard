@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.create_keyboard1.R;
 import com.facebook.ads.Ad;
@@ -37,6 +39,11 @@ public class PrivacyPolicy extends AppCompatActivity {
     ProgressBar  progressBar;
     TextView  txt5;
     private NativeAd nativeAd;
+
+    //Shared Preference
+    public static final String SHARED_PREF_PRIVACY = "policy";
+    public static final String PRIVACY_SHARED_PREF = "privacy";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +98,11 @@ public class PrivacyPolicy extends AppCompatActivity {
 
     public void movetomain(View view) {
 //        startActivity(new Intent(getApplicationContext(), MainMenu.class));
+        SharedPreferences sharedPreferences1 = this.getSharedPreferences(SHARED_PREF_PRIVACY, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences1.edit();
+        editor.putString(PRIVACY_SHARED_PREF, "yes");
+        editor.commit();
+        editor.apply();
         startActivity(new Intent(getApplicationContext(), InAppPurchase.class));
         finish();
     }
@@ -113,8 +125,8 @@ public class PrivacyPolicy extends AppCompatActivity {
                 // Set the Native Ad attributes
                 NativeAdViewAttributes viewAttributes = new NativeAdViewAttributes()
                         .setBackgroundColor(getResources().getColor(R.color.backgroundapp))
-                        .setTitleTextColor(Color.WHITE)
-                        .setDescriptionTextColor(Color.LTGRAY)
+                        .setTitleTextColor(getResources().getColor(R.color.buttoncolor))
+                        .setDescriptionTextColor(getResources().getColor(R.color.black))
                         .setButtonColor(getResources().getColor(R.color.buttoncolor))
                         .setButtonTextColor(Color.WHITE);
 

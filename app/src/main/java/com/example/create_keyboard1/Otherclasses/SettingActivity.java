@@ -1,13 +1,21 @@
+
 package com.example.create_keyboard1.Otherclasses;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
@@ -20,48 +28,79 @@ import static com.example.create_keyboard1.Otherclasses.SimpleIME.kv;
 
 public class SettingActivity extends AppCompatActivity {
 
-  public   CheckBox  chkpreview,chkprediction,chkvibrate;
-  public CardView   cardbackground,cardenable,cardset,carddisable;
+    public static final String POSITION_AD_PREVIEW ="preview" ;
+    public   CheckBox  chkpreview,chkprediction,chkvibrate;
+  public CardView   cardbackground,cardenable,cardset,carddisable,customback;
+
+    public static final String PREVIEW_PREF_NAME = "myloginapp";
+    public static final String PREVIEW_SHARED_PREF = "groupname";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         getSupportActionBar().setTitle("Keyboard Settings");
-        
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(SettingActivity.this,
+                    R.color.buttondark));
+        }
+//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(R.color.buttoncolor));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0099CD")));
+
         initialize();
 
-        chkprediction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(chkprediction.isChecked())
-                    Toast.makeText(SettingActivity.this, "prediction is on", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(SettingActivity.this, "prediction is off", Toast.LENGTH_SHORT).show();
-
-            }
-
-
-        });
-        chkvibrate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(chkvibrate.isChecked())
-                    Toast.makeText(SettingActivity.this, "vibrate is on", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(SettingActivity.this, "vibrate is off", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        chkprediction.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(chkprediction.isChecked()) {
+//                    if (SimpleIME.mPredictionOn == false) {
+//                        SimpleIME.mPredictionOn = true;
+//                        Toast.makeText(SettingActivity.this, "prediction is on", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                if(!chkprediction.isChecked()){
+//                        SimpleIME.mPredictionOn=false;
+//                        Toast.makeText(SettingActivity.this, "prediction is off", Toast.LENGTH_SHORT).show();
+//                }
+//
+//
+//            }
+//
+//
+//        });
+//        chkvibrate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(chkvibrate.isChecked())
+//                    Toast.makeText(SettingActivity.this, "vibrate is on", Toast.LENGTH_SHORT).show();
+//                else
+//                    Toast.makeText(SettingActivity.this, "vibrate is off", Toast.LENGTH_SHORT).show();
+//            }
+//        });
         chkpreview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(chkpreview.isChecked()){
-                    kv.setPreviewEnabled(true);
+                    SharedPreferences previewpreference = getApplicationContext().getSharedPreferences(PREVIEW_PREF_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = previewpreference.edit();
+                    editor.putInt(POSITION_AD_PREVIEW,1);
+                    editor.commit();
+                    editor.apply();
                     Toast.makeText(SettingActivity.this, "Preview Enable", Toast.LENGTH_SHORT).show();
+                    Log.d("simpleime","set :"+1);
                 }
-
                 else{
+
+                    SharedPreferences previewpreference = getApplicationContext().getSharedPreferences(PREVIEW_PREF_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = previewpreference.edit();
+                    editor.putInt(POSITION_AD_PREVIEW,0);
+                    editor.commit();
+                    editor.apply();
                     Toast.makeText(SettingActivity.this, "Preview Disable", Toast.LENGTH_SHORT).show();
-                    kv.setPreviewEnabled(false);
+                    Log.d("simpleime","set :"+0);
                 }
 
             }
@@ -99,18 +138,28 @@ public class SettingActivity extends AppCompatActivity {
         });
 
 
+
+        customback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getApplicationContext(),CamGalleryBackground.class));
+            }
+        });
+
         
     }
 
     private void initialize() {
         
         chkpreview=findViewById(R.id.checked1);
-        chkprediction=findViewById(R.id.checked2);
-        chkvibrate=findViewById(R.id.checked3);
+//        chkprediction=findViewById(R.id.checked2);
+//        chkvibrate=findViewById(R.id.checked3);
         cardbackground=findViewById(R.id.t4);
         cardenable=findViewById(R.id.t5);
         cardset=findViewById(R.id.t6);
         carddisable=findViewById(R.id.t7);
+        customback=findViewById(R.id.t3);
     }
     private void showMydialog() {
         AlertDialog alertDialog = new AlertDialog.Builder(this)

@@ -3,10 +3,20 @@ package com.example.create_keyboard1.Otherclasses;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.create_keyboard1.Adapter.PageAdapter;
 import com.example.create_keyboard1.R;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.NativeAdListener;
+import com.facebook.ads.NativeAdViewAttributes;
+import com.facebook.ads.NativeBannerAd;
+import com.facebook.ads.NativeBannerAdView;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -19,14 +29,23 @@ public class Background extends AppCompatActivity {
     TabItem tabimage;
     TabItem tabsport;
     TabItem tabflag;
+    TextView loadingtxt;
 
     private FirebaseAnalytics mFirebaseAnalytics;
+    private NativeBannerAd mNativeBannerAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_background);
         getSupportActionBar().hide();
+
+        loadingtxt=findViewById(R.id.loadtxt);
+
+
+        if (!AppPurchase.checkpurchases()) {
+            bannerNative();
+        }
 
 
         //analytics
@@ -82,4 +101,58 @@ public class Background extends AppCompatActivity {
 
 
     }
+
+
+
+    public  void bannerNative(){
+        mNativeBannerAd = new NativeBannerAd(this, getResources().getString(R.string.FbBannerAd));
+        //mNativeBannerAd = new NativeBannerAd(this, "#YOUR_PLACEMENT_ID");
+        NativeAdListener nativeAdListener = new NativeAdListener() {
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+
+                NativeAdViewAttributes viewAttributes = new NativeAdViewAttributes()
+                        .setBackgroundColor(getResources().getColor(R.color.backgroundapp))
+                        .setTitleTextColor(getResources().getColor(R.color.buttoncolor))
+                        .setDescriptionTextColor(getResources().getColor(R.color.black))
+                        .setButtonColor(getResources().getColor(R.color.buttoncolor))
+                        .setButtonTextColor(Color.WHITE);
+
+                View adView = NativeBannerAdView.render(Background.this, mNativeBannerAd, NativeBannerAdView.Type.HEIGHT_50, viewAttributes);
+                LinearLayout nativeBannerAdContainer = (LinearLayout) findViewById(R.id.banner_container);
+                nativeBannerAdContainer.addView(adView);
+                loadingtxt.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+
+            }
+
+            @Override
+            public void onMediaDownloaded(Ad ad) {
+
+            }
+        };
+        mNativeBannerAd.loadAd(
+                mNativeBannerAd.buildLoadAdConfig()
+                        .withAdListener(nativeAdListener)
+                        .build());
+
+
+
+    }
+
 }

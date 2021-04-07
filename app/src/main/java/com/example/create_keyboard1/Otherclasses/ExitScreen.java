@@ -89,8 +89,8 @@ public class ExitScreen extends AppCompatActivity {
                 // Set the Native Ad attributes
                 NativeAdViewAttributes viewAttributes = new NativeAdViewAttributes()
                         .setBackgroundColor(getResources().getColor(R.color.backgroundapp))
-                        .setTitleTextColor(Color.WHITE)
-                        .setDescriptionTextColor(Color.LTGRAY)
+                        .setTitleTextColor(getResources().getColor(R.color.buttoncolor))
+                        .setDescriptionTextColor(getResources().getColor(R.color.black))
                         .setButtonColor(getResources().getColor(R.color.buttoncolor))
                         .setButtonTextColor(Color.WHITE);
 

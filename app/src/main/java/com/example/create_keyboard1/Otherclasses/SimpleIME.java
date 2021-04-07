@@ -7,8 +7,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.inputmethodservice.InputMethodService;
 import android.media.AudioManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,6 +26,7 @@ import android.speech.SpeechRecognizer;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.method.MetaKeyKeyListener;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyCharacterMap;
@@ -36,17 +42,12 @@ import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.InputMethodSubtype;
 import android.widget.Toast;
-
-
 import com.example.create_keyboard1.Fragments.FlagsFrag;
 import com.example.create_keyboard1.Fragments.GradientFrag;
 import com.example.create_keyboard1.Fragments.ImageFrag;
 import com.example.create_keyboard1.Fragments.SportsFrag;
 import com.example.create_keyboard1.R;
 import com.example.create_keyboard1.database.DatabaseManager;
-import com.example.create_keyboard1.dictionary.TrieCharacters;
-import com.example.create_keyboard1.dictionary.TrieWords;
-import com.example.create_keyboard1.dictionary.WordFreq;
 import com.example.create_keyboard1.util.Keyboard;
 import com.example.create_keyboard1.util.KeyboardView;
 import com.karumi.dexter.Dexter;
@@ -56,19 +57,13 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.GROUPSNAME_SHARED_PREF1;
 import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.POSITION_AD1;
@@ -76,18 +71,26 @@ import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.SHARED_PREF_N
 import static com.example.create_keyboard1.Adapter.MyAdapter.GROUPSNAME_SHARED_PREF;
 import static com.example.create_keyboard1.Adapter.MyAdapter.POSITION_AD;
 import static com.example.create_keyboard1.Adapter.MyAdapter.SHARED_PREF_NAME;
+import static com.example.create_keyboard1.Otherclasses.CamGalleryBackground.SHARED_PREF_BACKID;
+import static com.example.create_keyboard1.Otherclasses.CamGalleryBackground.SHARED_PREF_CUSTOMBACK;
+import static com.example.create_keyboard1.Otherclasses.SettingActivity.POSITION_AD_PREVIEW;
+import static com.example.create_keyboard1.Otherclasses.SettingActivity.PREVIEW_PREF_NAME;
 
 
 public class SimpleIME extends InputMethodService
         implements KeyboardView.OnKeyboardActionListener {
 
+
+    boolean  sphenglish,sphurdu,sphhindu;
     public static InputConnection ic;
     public boolean flagforemoji = false;
     public static KeyboardView kv;
     public Keyboard keyboard;
-    SharedPreferences sharedPreferences, sharedPreferences1;
+    SharedPreferences sharedPreferences, sharedPreferencesforcustback;
+    SharedPreferences forpreview;
     private boolean caps = false;
-
+    public boolean isflagforurdu=false;
+    private boolean flagforenglish=false;
     //new urdu key code---------
     private SharedPreferences sharedPreferences2;
     private int mLastDisplayWidth;
@@ -97,14 +100,15 @@ public class SimpleIME extends InputMethodService
     private long mMetaState;
     private DatabaseManager db;
     private StringBuilder mComposing = new StringBuilder();
-    private boolean mPredictionOn;
+    public static boolean mPredictionOn;
     private boolean mCompletionOn;
     private CompletionInfo[] mCompletions;
     private boolean mSound;
     private ArrayList<String> list;
     static final boolean PROCESS_HARD_KEYS = true;
-    private boolean flagforenglish=true;
+
     public static String mActiveKeyboard;
+    private BitmapDrawable mBitmapDrawable;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -113,24 +117,45 @@ public class SimpleIME extends InputMethodService
         kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard, null);
         flagforemoji = false;
 
+
+
+
+
+        //for preview purpose
+        forpreview = getSharedPreferences(PREVIEW_PREF_NAME, MODE_PRIVATE);
+        int isval=forpreview.getInt(POSITION_AD_PREVIEW,1);
+        if(isval==0){
+            kv.setPreviewEnabled(false);
+            Log.d("simpleime",""+0);
+        }
+        if(isval==1){
+            kv.setPreviewEnabled(true);
+            Log.d("simpleime",""+1);
+        }
+
+        //for theme purpose
         sharedPreferences2 = getSharedPreferences(SHARED_PREF_NAME1, MODE_PRIVATE);
-        String value1 = sharedPreferences2.getString(GROUPSNAME_SHARED_PREF1, "");
         int pos1 = sharedPreferences2.getInt(POSITION_AD1, 0);
         if (pos1 == 0) {
             kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard, null);
+            Log.d("simpleime","Theme 0");
 
         } else if (pos1 == 1) {
             kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard2, null);
-
+            Log.d("simpleime","Theme 1");
         } else if (pos1 == 2) {
             kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard3, null);
-
+            Log.d("simpleime","Theme 2");
         }
 
         keyboard = new Keyboard(this, R.xml.custom_qwerty);
         kv.setKeyboard(keyboard);
+        flagforenglish=true;
+        isflagforurdu=false;
+        sphenglish=true;
 
         //shared preference code start
+        //for background  change
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         String value = sharedPreferences.getString(GROUPSNAME_SHARED_PREF, "");
         int pos = sharedPreferences.getInt(POSITION_AD, 0);
@@ -138,22 +163,52 @@ public class SimpleIME extends InputMethodService
 
             if (GradientFrag.mygradient.size() > 0)
                 kv.setBackgroundResource(GradientFrag.mygradient.get(pos).getTheme_image());
+            Log.d("simpleime","background g");
         } else if (TextUtils.equals("flag", value)) {
 
             if (FlagsFrag.myflag.size() > 0)
                 kv.setBackgroundResource(FlagsFrag.myflag.get(pos).getTheme_image());
+            Log.d("simpleime","background f");
         } else if (TextUtils.equals("image", value)) {
 
             if (ImageFrag.myimg.size() > 0)
                 kv.setBackgroundResource(ImageFrag.myimg.get(pos).getTheme_image());
+            Log.d("simpleime","background i");
         } else if (TextUtils.equals("sport", value)) {
 
             if (SportsFrag.mysport.size() > 0)
                 kv.setBackgroundResource(SportsFrag.mysport.get(pos).getTheme_image());
+            Log.d("simpleime","background s");
         } else {
-            kv.setBackgroundResource(R.drawable.gradient_0);
+
+                kv.setBackgroundResource(R.drawable.gradient_0);
+                Log.d("simpleime", "default");
+
         }
 
+
+
+        sharedPreferencesforcustback = getSharedPreferences(SHARED_PREF_CUSTOMBACK, MODE_PRIVATE);
+        String  urival=sharedPreferencesforcustback.getString(SHARED_PREF_BACKID,"");
+
+        if(!urival.isEmpty()){
+
+//
+//            String base = urival;
+//            byte[] imageAsBytes = Base64.decode(base.getBytes(), Base64.DEFAULT);
+//            Bitmap b = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
+//            mBitmapDrawable = new BitmapDrawable(getResources(), b);
+//            this.kv.setBackground(mBitmapDrawable);
+//
+//            String data=getFileToByte(urival);
+//            kv.setBackgroundResource(Integer.parseInt(data));
+//
+//            Bitmap  b= getBitmapFromURL(urival);
+//            Drawable d= new BitmapDrawable(this.getResources(), b);
+//            kv.setBackground(d);
+
+            Log.d("simpleime","custom background "+urival);
+        }
         // Close popup keyboard when screen is touched, if it's showing
         kv.setOnTouchListener((view, motionEvent) -> {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
@@ -161,6 +216,12 @@ public class SimpleIME extends InputMethodService
             }
             return false;
         });
+
+
+
+
+
+
 
         kv.setOnKeyboardActionListener(this);
         return kv;
@@ -340,6 +401,19 @@ public class SimpleIME extends InputMethodService
 //
 
 
+        forpreview = getSharedPreferences(PREVIEW_PREF_NAME, MODE_PRIVATE);
+        int isval=forpreview.getInt(POSITION_AD_PREVIEW,1);
+        if(isval==0){
+            kv.setPreviewEnabled(false);
+          //  Log.d("simpleime","onstat "+0);
+        }
+        if(isval==1){
+            kv.setPreviewEnabled(true);
+        //    Log.d("simpleime","onstat "+1);
+        }
+
+
+
         // Toast.makeText(context, "onStart "+value1+" "+pos1, Toast.LENGTH_SHORT).show();
         //------------------------------------------------------------------
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
@@ -362,10 +436,36 @@ public class SimpleIME extends InputMethodService
 
             if (SportsFrag.mysport.size() > 0)
                 kv.setBackgroundResource(SportsFrag.mysport.get(pos).getTheme_image());
+
+
         } else {
 
-            kv.setBackgroundResource(R.drawable.gradient_0);
+                kv.setBackgroundResource(R.drawable.gradient_0);
+                Log.d("simpleime", "on stat default");
+
         }
+
+
+        sharedPreferencesforcustback = getSharedPreferences(SHARED_PREF_CUSTOMBACK, MODE_PRIVATE);
+        String  urival=sharedPreferencesforcustback.getString(SHARED_PREF_BACKID,"");
+
+        if(!urival.isEmpty()){
+//
+//            Bitmap  b= getBitmapFromURL(urival);
+//            Drawable d= new BitmapDrawable(this.getResources(), b);
+//            //base 64 then use
+//            kv.setBackground(d);
+//
+//            String base = urival;
+//            byte[] imageAsBytes = Base64.decode(base.getBytes(), Base64.DEFAULT);
+//            Bitmap b = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
+//            mBitmapDrawable = new BitmapDrawable(getResources(), b);
+//            this.kv.setBackground(mBitmapDrawable);
+//            kv.setBackground(getResources().getDrawable(R.drawable.picart));
+            Log.d("simpleime","on stat custom background"+urival);
+
+        }
+
 
         super.onStartInputView(info, restarting);
 //        kv.closing();
@@ -565,81 +665,23 @@ public class SimpleIME extends InputMethodService
                 keyboard.setShifted(caps);
                 kv.invalidateAllKeys();
                 break;
-            case Keyboard.KEYCODE_DONE:
-                ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
-                break;
             case -16:
                 keyboard = new Keyboard(this, R.xml.urdu);
                 kv.setKeyboard(keyboard);
                 kv.setOnKeyboardActionListener(this);
+                isflagforurdu=true;
+                flagforenglish=false;
+                sphenglish=false;
+                sphhindu=false;
+                sphurdu=true;
                 break;
-//            case -100002:
-//                keyboard = new Keyboard(this, R.xml.hindi1);
-//                kv.setKeyboard(keyboard);
-//                kv.setOnKeyboardActionListener(this);
-//            break;
-//            case 0x2752:
-//                keyboard = new Keyboard(this, R.xml.custom_qwerty);
-//                kv.setKeyboard(keyboard);
-//                kv.setOnKeyboardActionListener(this);
-//                flagforenglish=true;
-//                break;
-//            case -63:
-//                keyboard = new Keyboard(this, R.xml.hindi2);
-//                kv.setKeyboard(keyboard);
-//                kv.setOnKeyboardActionListener(this);
-//                break;
-//            case -64:
-//                keyboard = new Keyboard(this, R.xml.hindi3);
-//                kv.setKeyboard(keyboard);
-//                kv.setOnKeyboardActionListener(this);
-//                break;
-//            case -65:
-//                keyboard = new Keyboard(this, R.xml.hindi1);
-//                kv.setKeyboard(keyboard);
-//                kv.setOnKeyboardActionListener(this);
-//                break;
-//            case -6:
-//                keyboard = new Keyboard(this, R.xml.roman);
-//                kv.setKeyboard(keyboard);
-//                kv.setOnKeyboardActionListener(this);
-//                break;
-//            case -62:
-//                keyboard = new Keyboard(this, R.xml.urdu_numeric);
-//                kv.setKeyboard(keyboard);
-//                kv.setOnKeyboardActionListener(this);
-//                break;
-//            case -61:
-//                keyboard = new Keyboard(this, R.xml.custom_qwerty);
-//                kv.setKeyboard(keyboard);
-//                kv.setOnKeyboardActionListener(this);
-//                break;
-//            case 0x221E:
-//                keyboard = new Keyboard(this, R.xml.roman);
-//                kv.setKeyboard(keyboard);
-//                kv.setOnKeyboardActionListener(this);
-//                break;
-//            case 0x2121:
-//                keyboard = new Keyboard(this, R.xml.roman2);
-//                kv.setKeyboard(keyboard);
-//                kv.setOnKeyboardActionListener(this);
-//                break;
-            case 207:
-                keyboard = new Keyboard(this, R.xml.custom_qwerty);
-                kv.setKeyboard(keyboard);
-                kv.setOnKeyboardActionListener(this);
-                break;
+
             case -14:
                 Intent i = new Intent(this, Background.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
                 break;
-            case -12:
-                flagforemoji = true;
-                keyboard = new Keyboard(this, R.xml.emojis);
-                kv.setKeyboard(keyboard);
-                kv.setOnKeyboardActionListener(this);
-                break;
+
             case -11:
                 requestHideSelf(0);
                 break;
@@ -655,7 +697,21 @@ public class SimpleIME extends InputMethodService
                                 if (report.areAllPermissionsGranted()) {
                                     Log.i("tag", "permission granted");
 
-                                    speechToText();
+                                    if(sphurdu){
+                                        speechToTextMultipleUrdu();
+                                        sphhindu=false;
+                                        sphenglish=false;
+                                    }
+                                    else if(sphhindu){
+                                        speechToTextMultipleHindi();
+                                        sphenglish=false;
+                                        sphurdu=false;
+                                    }
+                                    else{
+                                        speechToText();
+                                        sphurdu=false;
+                                        sphhindu=false;
+                                    }
                                 }
 
                                 if (report.isAnyPermissionPermanentlyDenied()) {
@@ -673,39 +729,13 @@ public class SimpleIME extends InputMethodService
 
                 break;
             case -15:
-
                 Intent intent = new Intent(this, SettingActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
                 break;
-            case 0x0730:
-                keyboard = new Keyboard(this, R.xml.time_emoji);
-                kv.setKeyboard(keyboard);
-                kv.setOnKeyboardActionListener(this);
-                break;
-            case 0x0731:
-                keyboard = new Keyboard(this, R.xml.emojis);
-                kv.setKeyboard(keyboard);
-                kv.setOnKeyboardActionListener(this);
-                break;
-            case 0x0732:
-                keyboard = new Keyboard(this, R.xml.weather_emojis);
-                kv.setKeyboard(keyboard);
-                kv.setOnKeyboardActionListener(this);
-                break;
-            case 0x0733:
-                keyboard = new Keyboard(this, R.xml.heart_emojis);
-                kv.setKeyboard(keyboard);
-                kv.setOnKeyboardActionListener(this);
-                break;
 
             default:
-                if (flagforemoji) {
-                    Log.d("mytagfor","default emojis");
-                    getCurrentInputConnection().commitText(String.valueOf(Character.toChars(primaryCode)), 1);
-
-                }
 
         }
         /////////////////////////////////////////////
@@ -722,48 +752,22 @@ public class SimpleIME extends InputMethodService
                 }
 
                 // Add update word in the dictionary
-       //         addUpdateWord();
+                try {
+                    addUpdateWord();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             sendKey(primaryCode);
     //        updateShiftKeyState(getCurrentInputEditorInfo());
         } else if (primaryCode == android.inputmethodservice.Keyboard.KEYCODE_DELETE) {
             handleBackspace();
         } else if (primaryCode == android.inputmethodservice.Keyboard.KEYCODE_SHIFT) {
-            handleShift();
+            //handleShift();
         } else if (primaryCode == android.inputmethodservice.Keyboard.KEYCODE_CANCEL) {
             handleClose();
             return;
         }
-//        else if (primaryCode == LatinKeyboardView.KEYCODE_LANGUAGE_SWITCH) {
-//            handleLanguageSwitch();
-//            return;}
-//        } else if (primaryCode == LatinKeyboardView.KEYCODE_OPTIONS) {
-//            // Show a menu or something'
-//        } else if (primaryCode == android.inputmethodservice.Keyboard.KEYCODE_MODE_CHANGE
-//                && mInputView != null) {
-//            android.inputmethodservice.Keyboard current = mInputView.getKeyboard();
-//            if ((current == mSymbolsAFKeyboard || current == mSymbolsShiftedAFKeyboard)
-//                    && getSelectedSubtype() == mFarsiKeyboard) {
-//                setLatinKeyboard(mFarsiKeyboard);
-//                updateShiftIcon();
-//            } else if ((current == mSymbolsAFKeyboard || current == mSymbolsShiftedAFKeyboard)
-//                    && getSelectedSubtype() == mPashtoKeyboard) {
-//                setLatinKeyboard(mPashtoKeyboard);
-//                updateShiftIcon();
-//            } else if (current == mFarsiKeyboard || current == mPashtoKeyboard) {
-//                setLatinKeyboard(mSymbolsAFKeyboard);
-//                mSymbolsAFKeyboard.setShifted(false);
-//            } else if ((current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard) && getSelectedSubtype() == mPashtoLatinKeyboard) {
-//                setLatinKeyboard(mPashtoLatinKeyboard);
-//                updateShiftIcon();
-//            } else if (current == mSymbolsKeyboard || current == mSymbolsShiftedKeyboard) {
-//                setLatinKeyboard(mQwertyKeyboard);
-//                updateShiftIcon();
-//            } else {
-//                setLatinKeyboard(mSymbolsKeyboard);
-//                mSymbolsKeyboard.setShifted(false);
-//            }
-
          else if (primaryCode == -10000) {
             // Show Emoticons
 
@@ -791,6 +795,9 @@ public class SimpleIME extends InputMethodService
                      keyboard = new Keyboard(this, R.xml.hindi1);
                      kv.setKeyboard(keyboard);
                      kv.setOnKeyboardActionListener(this);
+                     sphurdu=false;
+                     sphenglish=false;
+                     sphhindu=true;
 
              }
              else if(primaryCode==0x2752){
@@ -798,12 +805,19 @@ public class SimpleIME extends InputMethodService
                      kv.setKeyboard(keyboard);
                      kv.setOnKeyboardActionListener(this);
                      flagforenglish=true;
+                     isflagforurdu=false;
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
 
              }
              else if(primaryCode==-6) {
                      keyboard = new Keyboard(this, R.xml.roman);
                      kv.setKeyboard(keyboard);
                      kv.setOnKeyboardActionListener(this);
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
 
              }
              else if(primaryCode==-61){
@@ -811,6 +825,12 @@ public class SimpleIME extends InputMethodService
                      keyboard = new Keyboard(this, R.xml.custom_qwerty);
                      kv.setKeyboard(keyboard);
                      kv.setOnKeyboardActionListener(this);
+                     flagforenglish=true;
+                     isflagforurdu=false;
+
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
 
              }
              else if(primaryCode==0x2121){
@@ -819,23 +839,43 @@ public class SimpleIME extends InputMethodService
                      kv.setKeyboard(keyboard);
                      kv.setOnKeyboardActionListener(this);
 
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
+
              }
              else if(primaryCode==0x221E){
                      keyboard = new Keyboard(this, R.xml.roman);
                      kv.setKeyboard(keyboard);
                      kv.setOnKeyboardActionListener(this);
 
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
+
              }
              else if(primaryCode==-62){
                      keyboard = new Keyboard(this, R.xml.urdu_numeric);
                      kv.setKeyboard(keyboard);
                      kv.setOnKeyboardActionListener(this);
+                     isflagforurdu=true;
+                     flagforenglish=false;
+
+
+                 sphurdu=true;
+                 sphenglish=false;
+                 sphhindu=false;
+
              }
              else if(primaryCode==-63){
 
                      keyboard = new Keyboard(this, R.xml.hindi2);
                      kv.setKeyboard(keyboard);
                      kv.setOnKeyboardActionListener(this);
+
+                 sphurdu=false;
+                 sphenglish=false;
+                 sphhindu=true;
 
              }
              else if(primaryCode==-64){
@@ -844,6 +884,11 @@ public class SimpleIME extends InputMethodService
                      kv.setKeyboard(keyboard);
                      kv.setOnKeyboardActionListener(this);
 
+
+                 sphurdu=false;
+                 sphenglish=false;
+                 sphhindu=true;
+
              }
              else if(primaryCode==-65){
 
@@ -851,11 +896,96 @@ public class SimpleIME extends InputMethodService
                      kv.setKeyboard(keyboard);
                      kv.setOnKeyboardActionListener(this);
 
-             }
-             else
-             {
-            handleCharacter(primaryCode, keyCodes);}
+                 sphurdu=false;
+                 sphenglish=false;
+                 sphhindu=true;
 
+             }
+             else if(primaryCode==-4){
+
+                     ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
+
+             }
+             else if(primaryCode==207){
+                     keyboard = new Keyboard(this, R.xml.custom_qwerty);
+                     kv.setKeyboard(keyboard);
+                     kv.setOnKeyboardActionListener(this);
+                     flagforenglish=true;
+                     isflagforurdu=false;
+
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
+
+             }
+             else if(primaryCode==-12){
+                     flagforemoji = true;
+                     keyboard = new Keyboard(this, R.xml.emojis);
+                     kv.setKeyboard(keyboard);
+                     kv.setOnKeyboardActionListener(this);
+
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
+             }
+             else if(primaryCode==0x0730){
+
+                     keyboard = new Keyboard(this, R.xml.time_emoji);
+                     kv.setKeyboard(keyboard);
+                     kv.setOnKeyboardActionListener(this);
+
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
+
+             }
+             else if(primaryCode==0x0731){
+
+                     keyboard = new Keyboard(this, R.xml.emojis);
+                     kv.setKeyboard(keyboard);
+                     kv.setOnKeyboardActionListener(this);
+
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
+
+             }
+             else if(primaryCode==0x0732){
+
+                     keyboard = new Keyboard(this, R.xml.weather_emojis);
+                     kv.setKeyboard(keyboard);
+                     kv.setOnKeyboardActionListener(this);
+
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
+
+             }
+             else if(primaryCode==0x0733){
+                     keyboard = new Keyboard(this, R.xml.heart_emojis);
+                     kv.setKeyboard(keyboard);
+                     kv.setOnKeyboardActionListener(this);
+
+                 sphurdu=false;
+                 sphenglish=true;
+                 sphhindu=false;
+
+             }
+             else  if (flagforemoji) {
+                 Log.d("mytagfor","default emojis");
+               // mComposing.append(String.valueOf(Character.toChars(primaryCode)));
+                // getCurrentInputConnection().commitText(String.valueOf(Character.toChars(primaryCode)), 1);
+                 try {
+                     ic.commitText(String.valueOf(Character.toChars(primaryCode)),1);
+
+                 } catch (Exception e) {
+                     e.printStackTrace();
+                 }
+             }
+             else {
+
+                     handleCharacter(primaryCode, keyCodes);
+             }
         }
 
         if (mSound) playClick(primaryCode); // Play sound with button click.
@@ -1018,60 +1148,7 @@ public class SimpleIME extends InputMethodService
             return;
         }
 
-//        currentKeyboard = mInputView.getKeyboard();
-//        if (mQwertyKeyboard == currentKeyboard) {
-//            // Alphabet keyboard
-//            checkToggleCapsLock();
-//            mInputView.setShifted(mCapsLock || !mInputView.isShifted());
-//        } else if (currentKeyboard == mSymbolsKeyboard) {
-//            mSymbolsKeyboard.setShifted(true);
-//            setLatinKeyboard(mSymbolsShiftedKeyboard);
-//            mSymbolsShiftedKeyboard.setShifted(true);
-//        } else if (currentKeyboard == mSymbolsAFKeyboard) {
-//            mSymbolsKeyboard.setShifted(true);
-//            setLatinKeyboard(mSymbolsShiftedAFKeyboard);
-//            mSymbolsShiftedKeyboard.setShifted(true);
-//        } else if (currentKeyboard == mSymbolsShiftedAFKeyboard) {
-//            mSymbolsShiftedAFKeyboard.setShifted(false);
-//            setLatinKeyboard(mSymbolsAFKeyboard);
-//            mSymbolsAFKeyboard.setShifted(false);
-//        } else if (currentKeyboard == mSymbolsShiftedKeyboard) {
-//            mSymbolsShiftedKeyboard.setShifted(false);
-//            setLatinKeyboard(mSymbolsKeyboard);
-//            mSymbolsKeyboard.setShifted(false);
-//        } else if (mPashtoLatinKeyboard == currentKeyboard) {
-//            setLatinKeyboard(mPashtoLatinShiftedKeyboard);
-//            mActiveKeyboard = "ps_latin_AF_Shift";
-//            mPashtoLatinKeyboard.setShifted(false);
-//        } else if (mPashtoLatinShiftedKeyboard == currentKeyboard) {
-//            setLatinKeyboard(mPashtoLatinKeyboard);
-//            mActiveKeyboard = "ps_latin_AF";
-//            mPashtoLatinShiftedKeyboard.setShifted(false);
-//        }
-
-   //     updateShiftIcon();
     }
-
-    /**
-     * Change shift icon
-     */
-//    private void updateShiftIcon() {
-//        List<android.inputmethodservice.Keyboard.Key> keys = keyboard.getKeys();
-//        android.inputmethodservice.Keyboard.Key currentKey;
-//        for (int i = 0; i < keys.size() - 1; i++) {
-//            currentKey = keys.get(i);
-//            mInputView.invalidateAllKeys();
-//            if (currentKey.codes[0] == -1) {
-//                currentKey.label = null;
-//                if (mInputView.isShifted() || mCapsLock) {
-//                    currentKey.icon = getResources().getDrawable(R.drawable.ic_keyboard_capslock_on_24dp);
-//                } else {
-//                    currentKey.icon = getResources().getDrawable(R.drawable.ic_keyboard_capslock_24dp);
-//                }
-//                break;
-//            }
-//        }
-//    }
 
     private void handleCharacter(int primaryCode, int[] keyCodes) {
         if (isInputViewShown()) {
@@ -1090,9 +1167,7 @@ public class SimpleIME extends InputMethodService
             mComposing.append((char) primaryCode);
             getCurrentInputConnection().setComposingText(mComposing, 1);
             Log.d("mytagfor","else case");
-//            if(flagforemoji){
-//                ic.deleteSurroundingText(1, 0);
-//            }
+
         }
 
     }
@@ -1174,16 +1249,16 @@ public class SimpleIME extends InputMethodService
         kv.setPreviewEnabled(true);
 
         // Disable preview key on Shift, Delete, Space, Language, Symbol and Emoticon.
-        if (primaryCode == -1 || primaryCode == -5 || primaryCode == -2 || primaryCode == -10000
-                || primaryCode == -101 || primaryCode == 32) {
-            kv.setPreviewEnabled(false);
-        }
+//        if (primaryCode == -1 || primaryCode == -5 || primaryCode == -2 || primaryCode == -10000
+//                || primaryCode == -101 || primaryCode == 32) {
+//            kv.setPreviewEnabled(false);
+//        }
     }
 
     public void onRelease(int primaryCode) {
     }
 
-        /**
+    /**
      * This class improves performance of the app when prediction is on.
      * The database query is executed in the background.
      */
@@ -1194,8 +1269,8 @@ public class SimpleIME extends InputMethodService
         void getSubtype(Keyboard mCurKeyboard) {
             if (flagforenglish) {
                 subType = "english";
-            } else {
-                subType = "farsi";
+            } else if(isflagforurdu) {
+                subType = "pashto";
             }
         }
 
@@ -1211,7 +1286,6 @@ public class SimpleIME extends InputMethodService
             setSuggestions(result, true, true);
         }
     }
-
     /**
      * Add or update word in the dictionary
      */
@@ -1226,7 +1300,6 @@ public class SimpleIME extends InputMethodService
             }
         }
     }
-
     /**
      * Return a last word from input connection with space
      *
@@ -1258,14 +1331,9 @@ public class SimpleIME extends InputMethodService
                     System.out.println("No voice results");
                 } else {
                     System.out.println("Printing matches: ");
-//                    for (String match : voiceResults) {
-//                        System.out.println(match);
-//                        Log.i("tag",match);
-//
-//                    }
                     ic.commitText(voiceResults.get(0), 1);
                     Log.i("tag", voiceResults.get(0));
-//                    kv.setVisibility(View.VISIBLE);
+
                 }
             }
 
@@ -1275,20 +1343,181 @@ public class SimpleIME extends InputMethodService
                 Log.i("tag", "Ready for speech");
 
             }
+        @Override
+            public void onError(int error) {
+                System.err.println("Error listening for speech: " + error);
+                Log.i("tag", "Error listening for speech: " + error);
+            }
 
-            /**
-             *  ERROR_NETWORK_TIMEOUT = 1;
-             *  ERROR_NETWORK = 2;
-             *  ERROR_AUDIO = 3;
-             *  ERROR_SERVER = 4;
-             *  ERROR_CLIENT = 5;
-             *  ERROR_SPEECH_TIMEOUT = 6;
-             *  ERROR_NO_MATCH = 7;
-             *  ERROR_RECOGNIZER_BUSY = 8;
-             *  ERROR_INSUFFICIENT_PERMISSIONS = 9;
-             *
-             * @param error code is defined in SpeechRecognizer
-             */
+            @Override
+            public void onBeginningOfSpeech() {
+                System.out.println("Speech starting");
+                Log.i("tag", "Speech starting");
+            }
+
+            @Override
+            public void onBufferReceived(byte[] buffer) {
+                // TODO Auto-generated method stub
+                Log.i("tag", "on buffered received");
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+                // TODO Auto-generated method stub
+                Log.i("tag", "onEndOfSpeech");
+
+
+            }
+
+            @Override
+            public void onEvent(int eventType, Bundle params) {
+                // TODO Auto-generated method stub
+                Log.i("tag", "onEvent");
+
+            }
+
+            @Override
+            public void onPartialResults(Bundle partialResults) {
+                // TODO Auto-generated method stub
+                Log.i("tag", "onPartialResults");
+
+            }
+
+            @Override
+            public void onRmsChanged(float rmsdB) {
+                // TODO Auto-generated method stub
+                Log.i("tag", "onRmsChanged");
+
+            }
+        };
+        recognizer.setRecognitionListener(listener);
+        recognizer.startListening(intent);
+    }
+    void speechToTextMultipleHindi() {
+        Toast.makeText(this, "Listening...", Toast.LENGTH_SHORT).show();
+        CharSequence language="hi-IN";
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, language);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, language);
+        intent.putExtra(RecognizerIntent.EXTRA_SUPPORTED_LANGUAGES, language);
+        intent.putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, language);
+        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, language);
+        intent.putExtra(RecognizerIntent.EXTRA_RESULTS, language);
+
+
+        SpeechRecognizer recognizer = SpeechRecognizer
+                .createSpeechRecognizer(this.getApplicationContext());
+        RecognitionListener listener = new RecognitionListener() {
+            @Override
+            public void onResults(Bundle results) {
+                ArrayList<String> voiceResults = results
+                        .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                if (voiceResults == null) {
+                    System.out.println("No voice results");
+                } else {
+                    System.out.println("Printing matches: ");
+                    ic.commitText(voiceResults.get(0), 1);
+                    Log.i("tag", voiceResults.get(0));
+
+                }
+            }
+
+            @Override
+            public void onReadyForSpeech(Bundle params) {
+                System.out.println("Ready for speech");
+                Log.i("tag", "Ready for speech");
+
+            }
+            @Override
+            public void onError(int error) {
+                System.err.println("Error listening for speech: " + error);
+                Log.i("tag", "Error listening for speech: " + error);
+            }
+
+            @Override
+            public void onBeginningOfSpeech() {
+                System.out.println("Speech starting");
+                Log.i("tag", "Speech starting");
+            }
+
+            @Override
+            public void onBufferReceived(byte[] buffer) {
+                // TODO Auto-generated method stub
+                Log.i("tag", "on buffered received");
+
+            }
+
+            @Override
+            public void onEndOfSpeech() {
+                // TODO Auto-generated method stub
+                Log.i("tag", "onEndOfSpeech");
+
+
+            }
+
+            @Override
+            public void onEvent(int eventType, Bundle params) {
+                // TODO Auto-generated method stub
+                Log.i("tag", "onEvent");
+
+            }
+
+            @Override
+            public void onPartialResults(Bundle partialResults) {
+                // TODO Auto-generated method stub
+                Log.i("tag", "onPartialResults");
+
+            }
+
+            @Override
+            public void onRmsChanged(float rmsdB) {
+                // TODO Auto-generated method stub
+                Log.i("tag", "onRmsChanged");
+
+            }
+        };
+        recognizer.setRecognitionListener(listener);
+        recognizer.startListening(intent);
+    }
+    void speechToTextMultipleUrdu() {
+        Toast.makeText(this, "Listening...", Toast.LENGTH_SHORT).show();
+        CharSequence language="ur";
+    //    CharSequence language="hi-IN";
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, language);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, language);
+        intent.putExtra(RecognizerIntent.EXTRA_SUPPORTED_LANGUAGES, language);
+        intent.putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, language);
+        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, language);
+        intent.putExtra(RecognizerIntent.EXTRA_RESULTS, language);
+
+
+        SpeechRecognizer recognizer = SpeechRecognizer
+                .createSpeechRecognizer(this.getApplicationContext());
+        RecognitionListener listener = new RecognitionListener() {
+            @Override
+            public void onResults(Bundle results) {
+                ArrayList<String> voiceResults = results
+                        .getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                if (voiceResults == null) {
+                    System.out.println("No voice results");
+                } else {
+                    System.out.println("Printing matches: ");
+                    ic.commitText(voiceResults.get(0), 1);
+                    Log.i("tag", voiceResults.get(0));
+
+                }
+            }
+
+            @Override
+            public void onReadyForSpeech(Bundle params) {
+                System.out.println("Ready for speech");
+                Log.i("tag", "Ready for speech");
+
+            }
             @Override
             public void onError(int error) {
                 System.err.println("Error listening for speech: " + error);
@@ -1342,6 +1571,20 @@ public class SimpleIME extends InputMethodService
     }
 
 
+    public Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
 

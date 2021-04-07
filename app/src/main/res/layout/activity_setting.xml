@@ -48,12 +48,14 @@
                     android:layout_marginBottom="6dp"
                     android:fontFamily="@font/anonymous_pro"
                     android:text="Show preview of the key\nthat is touched."
-                    android:textSize="17sp" />
+                    android:textSize="17sp"
+                    android:textColor="@color/black"/>
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:checked="true"
+
                 android:id="@+id/checked1"/>
 
                 <View
@@ -75,51 +77,51 @@
             app:cardBackgroundColor="@color/WhiteSmoke"
             android:id="@+id/t2"
             android:layout_below="@+id/t1">
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Prediction"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:textSize="22sp"
-                    android:fontFamily="@font/aldrich"
-                    android:id="@+id/title2"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Display suggested words\nwhile typing."
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="17sp"
-                    android:id="@+id/txt2"
-                    android:fontFamily="@font/anonymous_pro"
-                    android:layout_below="@+id/title2"
-                    android:layout_marginBottom="6dp"
-                    />
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:checked="true"
-                    android:id="@+id/checked2"/>
+<!--            <RelativeLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="2dp">-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Prediction"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:textSize="22sp"-->
+<!--                    android:fontFamily="@font/aldrich"-->
+<!--                    android:id="@+id/title2"/>-->
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Display suggested words\nwhile typing."-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:layout_marginLeft="10dp"-->
+<!--                    android:textSize="17sp"-->
+<!--                    android:id="@+id/txt2"-->
+<!--                    android:fontFamily="@font/anonymous_pro"-->
+<!--                    android:layout_below="@+id/title2"-->
+<!--                    android:layout_marginBottom="6dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    />-->
+<!--                <CheckBox-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:id="@+id/checked2"/>-->
 
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/black"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginTop="4dp"
-                    />
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:background="@color/black"-->
+<!--                    android:layout_alignParentBottom="true"-->
+<!--                    android:layout_marginTop="4dp"-->
+<!--                    />-->
 
-            </RelativeLayout>
+<!--            </RelativeLayout>-->
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -138,7 +140,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vibrate"
+                    android:text="Custom Background"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:layout_marginRight="10dp"
@@ -151,7 +153,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vibrate on a key when\ntouched."
+                    android:text="Set background from gallery\nor camera."
                     android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
                     android:textSize="17sp"
@@ -159,13 +161,14 @@
                     android:layout_below="@+id/title3"
                     android:fontFamily="@font/anonymous_pro"
                     android:layout_marginBottom="6dp"
+                    android:textColor="@color/black"
                     />
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:checked="true"
-                    android:id="@+id/checked3"/>
+<!--                <CheckBox-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:checked="true"-->
+<!--                    android:id="@+id/checked3"/>-->
 
 
 
@@ -197,7 +200,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Custom Background"
+                    android:text="Set Background"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     android:layout_marginRight="10dp"
@@ -205,7 +208,8 @@
                     android:layout_marginTop="10dp"
                     android:textSize="22sp"
                     android:fontFamily="@font/aldrich"
-                    android:id="@+id/title4"/>
+                    android:id="@+id/title4"
+                    />
                 <TextView
 
                     android:layout_width="wrap_content"
@@ -218,6 +222,7 @@
                     android:layout_below="@+id/title4"
                     android:fontFamily="@font/anonymous_pro"
                     android:layout_marginBottom="6dp"
+                    android:textColor="@color/black"
                     />
 
                 <View
@@ -269,6 +274,7 @@
                     android:layout_below="@+id/title5"
                     android:fontFamily="@font/anonymous_pro"
                     android:layout_marginBottom="6dp"
+                    android:textColor="@color/black"
                     />
 
                 <View
@@ -319,6 +325,7 @@
                     android:layout_below="@+id/title6"
                     android:fontFamily="@font/anonymous_pro"
                     android:layout_marginBottom="6dp"
+                    android:textColor="@color/black"
                     />
 
                 <View
@@ -370,6 +377,7 @@
                     android:layout_below="@+id/title7"
                     android:fontFamily="@font/anonymous_pro"
                     android:layout_marginBottom="6dp"
+                    android:textColor="@color/black"
                     />
 
 

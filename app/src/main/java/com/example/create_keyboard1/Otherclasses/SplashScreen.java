@@ -3,9 +3,11 @@ package com.example.create_keyboard1.Otherclasses;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -25,6 +27,10 @@ import com.facebook.ads.NativeAdView;
 import com.facebook.ads.NativeAdViewAttributes;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static com.example.create_keyboard1.Adapter.MyAdapter.GROUPSNAME_SHARED_PREF;
+import static com.example.create_keyboard1.Adapter.MyAdapter.SHARED_PREF_NAME;
+import static com.example.create_keyboard1.Otherclasses.PrivacyPolicy.PRIVACY_SHARED_PREF;
+import static com.example.create_keyboard1.Otherclasses.PrivacyPolicy.SHARED_PREF_PRIVACY;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -32,6 +38,7 @@ public class SplashScreen extends AppCompatActivity {
     TextView  loading;
     ProgressBar progressBar;
     private InterstitialAd interstitialAd;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,15 +84,31 @@ public class SplashScreen extends AppCompatActivity {
         if (interstitialAd != null && interstitialAd.isAdLoaded()) {
             interstitialAd.show();
         } else {
-            Log.e("mytag", "Interstitial ad dismissed.");
-            startActivity(new Intent(getApplicationContext(), PrivacyPolicy.class));
-            finish();
+
+
+            String val=yesno();
+            if(TextUtils.equals(val,"yes")){
+                Intent it = new Intent(SplashScreen.this, InAppPurchase.class);
+                startActivity(it);
+                finish();
+            }
+            else {
+                Intent it = new Intent(SplashScreen.this, PrivacyPolicy.class);
+                startActivity(it);
+                finish();
+            }
+
         }
 
 
     }
 
 
+    public  String yesno(){
+        sharedPreferences = getSharedPreferences(SHARED_PREF_PRIVACY, MODE_PRIVATE);
+        String value = sharedPreferences.getString(PRIVACY_SHARED_PREF, "");
+        return  value;
+    }
 
     public void NativeAds(){
 
@@ -103,8 +126,8 @@ public class SplashScreen extends AppCompatActivity {
                 // Set the Native Ad attributes
                 NativeAdViewAttributes viewAttributes = new NativeAdViewAttributes()
                         .setBackgroundColor(getResources().getColor(R.color.backgroundapp))
-                        .setTitleTextColor(Color.WHITE)
-                        .setDescriptionTextColor(Color.LTGRAY)
+                        .setTitleTextColor(getResources().getColor(R.color.buttoncolor))
+                        .setDescriptionTextColor(getResources().getColor(R.color.black))
                         .setButtonColor(getResources().getColor(R.color.buttoncolor))
                         .setButtonTextColor(Color.WHITE);
 
@@ -161,10 +184,18 @@ public class SplashScreen extends AppCompatActivity {
 
                 // Interstitial dismissed callback
                 Log.e("mytag", "Interstitial ad dismissed.");
-                Intent it = new Intent(SplashScreen.this, PrivacyPolicy.class);
-                startActivity(it);
-                finish();
 
+                String val=yesno();
+                if(TextUtils.equals(val,"yes")){
+                    Intent it = new Intent(SplashScreen.this, InAppPurchase.class);
+                    startActivity(it);
+                    finish();
+                }
+                else {
+                    Intent it = new Intent(SplashScreen.this, PrivacyPolicy.class);
+                    startActivity(it);
+                    finish();
+                }
             }
 
             @Override
@@ -211,8 +242,6 @@ public class SplashScreen extends AppCompatActivity {
         }
         super.onDestroy();
     }
-
-
 
 
 }

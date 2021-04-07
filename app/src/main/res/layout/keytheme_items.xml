@@ -30,7 +30,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
-                android:background="@color/buttoncolor"
+                android:background="@color/buttondark"
                 android:fontFamily="@font/montserrat_alternates"
                 android:gravity="center"
                 android:text="Theme: 1"

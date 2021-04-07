@@ -5,7 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Otherclasses.InstructionScreenS"
-    android:background="@drawable/instruction_screen">
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/instruction_screen"
+        android:layout_above="@+id/top"
+        >
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/buttoncolor"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentBottom="true"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:text="Ad is loading..."
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            android:id="@+id/loadtxt"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:id="@+id/banner_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            />
 
 
+    </RelativeLayout>
 </RelativeLayout>

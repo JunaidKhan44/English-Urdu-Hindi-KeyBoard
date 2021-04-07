@@ -150,19 +150,27 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="candidate_normal">#FF000000</color>
-    <color name="candidate_recommended">#000000</color>
-    <color name="candidate_other">#ff808080</color>
-    <color name="candidate_background">#bbffffff</color>
     <color name="five_trans">#7F000000</color>
     <color name="full_trans">#00000000</color>
     <color name="full_opaque">#FF000000</color>
     <color name="eleven_trans">#1C000000</color>
 
 
-    <color name="backgroundapp">#131e25</color>
-    <color name="buttoncolor">#fe6869</color>
-    <color name="buttondark">#cc3746</color>
 
+
+    <!-- Suggested bar colors -->
+    <color name="candidate_normal">#FF000000</color>
+    <color name="candidate_recommended">#e35900</color>
+    <color name="candidate_other">#ff808080</color>
+    <color name="candidate_background">#bbffffff</color>
+
+    <color name="backgroundapp">#FFFFFF</color>
+    <color name="buttoncolor">#0099CD</color>
+    <color name="buttondark">#0063CD</color>
+
+
+<!--    <color name="backgroundapp">#131e25</color>-->
+<!--    <color name="buttoncolor">#fe6869</color>-->
+<!--    <color name="buttondark">#cc3746</color>-->
 
 </resources>

@@ -29,7 +29,7 @@ public class AppPurchase {
                 purchase = true;
             }
             else {
-              //  purchase = false;
+              // purchase = false;
                 purchase = true;
             }
         } catch (Exception e) {

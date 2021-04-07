@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
@@ -26,6 +27,8 @@ import com.example.create_keyboard1.Otherclasses.SimpleIME;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyHolder> {
 
     public Context context;
@@ -34,7 +37,9 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyHolder> {
 
     public static final String SHARED_PREF_NAME = "myloginapp";
     public static final String GROUPSNAME_SHARED_PREF = "groupname";
+    public static final String GROUPSNAME_THEME = "themename";
     public static final String POSITION_AD="pos";
+    private SharedPreferences preferencesmine;
 
 
     public MyAdapter(Context context, ArrayList<Model> arrayList) {
@@ -73,12 +78,22 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyHolder> {
                 SharedPreferences sharedPreferences1 = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences1.edit();
                 editor.putString(GROUPSNAME_SHARED_PREF, "gradient");
+                editor.putString(GROUPSNAME_THEME,arrayList.get(position).theme_name);
                 editor.putInt(POSITION_AD,position);
                 editor.commit();
                 editor.apply();
                 Toast.makeText(context,"Background Selected..", Toast.LENGTH_SHORT).show();
             }
         });
+
+        if(loadsharedString().equalsIgnoreCase("gradient")){
+            if(loadshared().equalsIgnoreCase(arrayList.get(position).theme_name)){
+                holder.dapply.setBackgroundColor(Color.GRAY);}
+            else{
+                holder.dapply.setBackgroundColor(context.getResources().getColor(R.color.buttoncolor));
+            }
+        }
+
     }
 
     @Override
@@ -111,5 +126,22 @@ public class MyAdapter extends  RecyclerView.Adapter<MyAdapter.MyHolder> {
         return imageEncoded;
     }
 
+    private String loadshared() {
+        preferencesmine = context.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        String val;
+        val = preferencesmine.getString(GROUPSNAME_THEME, "");
+        return  val;
+    }
+    private String loadsharedString() {
+        preferencesmine = context.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        String val;
+        val = preferencesmine.getString(GROUPSNAME_SHARED_PREF, "");
+        if(!val.isEmpty()){
+            return  val;
+        }
+        else {
+            return "";
+        }
+    }
 
 }

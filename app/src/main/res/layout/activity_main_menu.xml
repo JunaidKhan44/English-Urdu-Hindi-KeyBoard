@@ -7,9 +7,6 @@
     tools:context=".Otherclasses.MainMenu"
     android:background="@color/backgroundapp"
     >
-
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -42,7 +39,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_above="@+id/top"
         android:layout_below="@+id/header"
@@ -53,6 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal"
         android:weightSum="2"
         android:id="@+id/block"
@@ -63,7 +61,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/enablekeyboard"
+                    android:src="@drawable/enableleyboard"
                     android:id="@+id/img1"
                     android:layout_weight="1"
                     android:onClick="enablingKeyboard"
@@ -85,7 +83,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/block"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal"
         android:id="@+id/theme"
         android:weightSum="2"
@@ -118,6 +117,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/theme"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:id="@+id/setkeyboard"
         android:orientation="horizontal"
         android:weightSum="2"
@@ -149,10 +149,6 @@
     </RelativeLayout>
 
 
-
-
-
-
     <RelativeLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
@@ -181,6 +177,5 @@
 
 
     </RelativeLayout>
-
 
 </RelativeLayout>

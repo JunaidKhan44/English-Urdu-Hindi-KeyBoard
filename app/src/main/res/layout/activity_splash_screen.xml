@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ad is loading.."
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:layout_gravity="center"
                 android:id="@+id/loading"/>
 
@@ -55,7 +55,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        android:onClick="nextactivity"
         android:id="@+id/bottom"
         android:gravity="center_horizontal">
 
@@ -73,6 +72,8 @@
             android:layout_below="@+id/spl"
             android:visibility="invisible"
             android:id="@+id/nextbtn"
+            android:onClick="nextactivity"
+
             />
 
     </RelativeLayout>

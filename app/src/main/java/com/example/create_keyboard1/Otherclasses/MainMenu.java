@@ -33,12 +33,7 @@ import com.facebook.ads.NativeBannerAdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.onesignal.OneSignal;
 
-import org.w3c.dom.Text;
 
-import static com.example.create_keyboard1.Otherclasses.ScreenUtil.MoreApp;
-import static com.example.create_keyboard1.Otherclasses.ScreenUtil.Rateus;
-import static com.example.create_keyboard1.Otherclasses.ScreenUtil.Share;
-import static java.security.AccessController.getContext;
 
 public class MainMenu extends AppCompatActivity {
 
@@ -136,14 +131,7 @@ public class MainMenu extends AppCompatActivity {
 
                                 }
                                 break;
-//                            case  R.id.exit_app:
-//                                startActivity(new Intent(getApplicationContext(),ExitScreen.class));
-//                                break;
                             default:
-
-                                break;
-
-
 
                         }
                         return false;
@@ -258,8 +246,8 @@ public class MainMenu extends AppCompatActivity {
 
                 NativeAdViewAttributes viewAttributes = new NativeAdViewAttributes()
                         .setBackgroundColor(getResources().getColor(R.color.backgroundapp))
-                        .setTitleTextColor(Color.WHITE)
-                        .setDescriptionTextColor(Color.LTGRAY)
+                        .setTitleTextColor(getResources().getColor(R.color.buttoncolor))
+                        .setDescriptionTextColor(getResources().getColor(R.color.black))
                         .setButtonColor(getResources().getColor(R.color.buttoncolor))
                         .setButtonTextColor(Color.WHITE);
 

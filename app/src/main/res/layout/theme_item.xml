@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
-                android:background="@color/buttoncolor"
+                android:background="@color/buttondark"
                 android:fontFamily="@font/montserrat_alternates"
                 android:gravity="center"
                 android:text="Theme Name"

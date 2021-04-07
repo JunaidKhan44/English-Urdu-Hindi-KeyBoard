@@ -53,7 +53,7 @@ public class InAppPurchase extends AppCompatActivity implements  BillingProcesso
         } else {
             Log.e("mytag", "Interstitial ad dismissed.");
             startActivity(new Intent(getApplicationContext(), MainMenu.class));
-            finish();
+            this.finish();
         }
     }
 
@@ -77,6 +77,7 @@ public class InAppPurchase extends AppCompatActivity implements  BillingProcesso
                 // Interstitial dismissed callback
                 Log.e("mytag", "Interstitial ad dismissed.");
                 startActivity(new Intent(getApplicationContext(), MainMenu.class));
+                finish();
 
             }
 
