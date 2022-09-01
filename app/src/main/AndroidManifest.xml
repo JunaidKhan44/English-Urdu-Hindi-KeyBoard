@@ -13,6 +13,8 @@
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -20,17 +22,19 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/splashicon"
         android:supportsRtl="true"
+        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.Create_Keyboard1">
-        <activity android:name=".Otherclasses.CamGalleryBackground"></activity>
-        <activity android:name=".Otherclasses.InAppPurchase" />
-        <activity android:name=".Otherclasses.InstructionScreenS" />
-        <activity android:name=".Otherclasses.PrivacyPolicy" />
-        <activity android:name=".Otherclasses.KeyboardThemeActivity" />
-        <activity android:name=".Otherclasses.SettingActivity" />
-        <activity android:name=".Otherclasses.ExitScreen" />
-        <activity android:name=".Otherclasses.Background" />
-        <activity android:name=".Otherclasses.MainMenu" />
-        <activity android:name=".Otherclasses.SplashScreen">
+        <activity android:name=".otherclasses.CamGalleryBackground"></activity>
+        <activity android:name=".otherclasses.InAppPurchase" />
+        <activity android:name=".otherclasses.InstructionScreenS" />
+        <activity android:name=".otherclasses.PrivacyPolicy" />
+        <activity android:name=".otherclasses.KeyboardThemeActivity" />
+        <activity android:name=".otherclasses.SettingActivity" />
+        <activity android:name=".otherclasses.ExitScreen" />
+        <activity android:name=".otherclasses.Background" />
+        <activity android:name=".otherclasses.MainMenu" />
+        <activity android:name=".otherclasses.SplashScreen">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,8 +42,15 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+
+
+
         <service
-            android:name=".Otherclasses.SimpleIME"
+            android:name=".otherclasses.SimpleIME"
             android:label="@string/simple_ime"
             android:permission="android.permission.BIND_INPUT_METHOD">
             <meta-data

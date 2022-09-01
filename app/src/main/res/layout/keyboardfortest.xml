@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/header">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/buttondark"
+        android:weightSum="5"
+        android:layout_marginBottom="1dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_keyboard_hide_24"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/hidekeybaord"
+            android:layout_margin="8dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_insert_emoticon_24"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/emojis"
+            android:layout_margin="8dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/mic"
+            android:src="@drawable/ic_baseline_mic_24"
+            android:background="@drawable/background1"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_color_lens_24"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/color"
+            android:layout_margin="8dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_settings_24"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/setting"
+            android:layout_margin="8dp"
+            />
+    </LinearLayout>
+
+
+    <com.example.create_keyboard1.util.KeyboardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:id="@+id/keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_1"
+        app:keyBackground="@drawable/background_simple"
+        app:keyPreviewHeight="50dp"
+        app:keyPreviewLayout="@layout/preview"
+        app:keyTextColor="@color/white"
+        app:keyTextSize="18sp"
+        app:labelTextSize="18sp"
+        app:popupLayout="@layout/popupkeyboard"
+        app:shadowColor="@color/Gray"
+        />
+
+
+    <!--2-->
+    <com.example.create_keyboard1.util.KeyboardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:id="@+id/keyboard2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_1"
+        app:keyBackground="@drawable/background_white"
+        app:keyPreviewHeight="50dp"
+        app:keyPreviewLayout="@layout/preview"
+        app:keyTextColor="@color/white"
+        app:keyTextSize="18sp"
+        app:labelTextSize="18sp"
+        app:popupLayout="@layout/popupkeyboard"
+        app:shadowColor="@color/Gray"
+        android:visibility="gone"
+        >
+
+    </com.example.create_keyboard1.util.KeyboardView>
+
+    <!--3-->
+    <com.example.create_keyboard1.util.KeyboardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:id="@+id/keyboard3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/gradient_0"
+        app:keyBackground="@drawable/background_black"
+        app:keyPreviewHeight="50dp"
+        app:keyPreviewLayout="@layout/preview"
+        app:keyTextColor="@color/white"
+        app:keyTextSize="18sp"
+        app:labelTextSize="18sp"
+        app:popupLayout="@layout/popupkeyboard"
+        app:shadowColor="@color/Gray"
+        android:visibility="gone"
+        >
+
+    </com.example.create_keyboard1.util.KeyboardView>
+
+</LinearLayout>

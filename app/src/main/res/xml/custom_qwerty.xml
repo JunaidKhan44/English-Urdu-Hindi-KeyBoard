@@ -1,20 +1,17 @@
 <Keyboard xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-
     app:horizontalGap="0.5%p"
     app:verticalGap="4px"
     app:keyHeight="50dp"
-
     >
-    <Row>
-        <Key app:codes="-11" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24"  app:keyWidth="20%p"  />
-        <Key app:codes="-12" app:keyIcon="@drawable/ic_baseline_insert_emoticon_24" app:keyWidth="20%p"/>
-        <Key app:codes="-13" app:keyIcon="@drawable/ic_baseline_mic_24" app:keyWidth="20%p"
 
-            />
-        <Key app:codes="-14" app:keyIcon="@drawable/ic_baseline_color_lens_24" app:keyWidth="20%p"/>
-        <Key app:codes="-15" app:keyIcon="@drawable/ic_baseline_settings_24" app:keyEdgeFlags="right" app:keyWidth="20%p"/>
-    </Row>
+<!--    <Row>-->
+<!--        <Key app:codes="-11" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24"  app:keyWidth="20%p"  />-->
+<!--        <Key app:codes="-12" app:keyIcon="@drawable/ic_baseline_insert_emoticon_24" app:keyWidth="20%p"/>-->
+<!--        <Key app:codes="-13" app:keyIcon="@drawable/ic_baseline_mic_24" app:keyWidth="20%p" />-->
+<!--        <Key app:codes="-14" app:keyIcon="@drawable/ic_baseline_color_lens_24" app:keyWidth="20%p"/>-->
+<!--        <Key app:codes="-15" app:keyIcon="@drawable/ic_baseline_settings_24" app:keyEdgeFlags="right" app:keyWidth="20%p"/>-->
+<!--    </Row>-->
 
     <Row>
         <Key app:codes="113" app:keyLabel="q" app:keyEdgeFlags="left" app:popupCharacters="@string/zero" app:popupKeyboard="@layout/popupkeyboard" app:keyWidth="9%p"  />

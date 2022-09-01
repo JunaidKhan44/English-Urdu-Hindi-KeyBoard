@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Otherclasses.MainMenu"
+    tools:context=".otherclasses.MainMenu"
     android:background="@color/backgroundapp"
     >
     <RelativeLayout

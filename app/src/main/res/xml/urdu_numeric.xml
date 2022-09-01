@@ -6,13 +6,13 @@
     app:keyHeight="50dp"
     >
 
-    <Row>
-        <Key app:codes="-11" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24"  app:keyWidth="20%p" />
-        <Key app:codes="-12" app:keyIcon="@drawable/ic_baseline_insert_emoticon_24" app:keyWidth="20%p"/>
-        <Key app:codes="-13" app:keyIcon="@drawable/ic_baseline_mic_24" app:keyWidth="20%p" />
-        <Key app:codes="-14" app:keyIcon="@drawable/ic_baseline_color_lens_24" app:keyWidth="20%p"/>
-        <Key app:codes="-15" app:keyIcon="@drawable/ic_baseline_settings_24" app:keyEdgeFlags="right" app:keyWidth="20%p"/>
-    </Row>
+<!--    <Row>-->
+<!--        <Key app:codes="-11" app:keyIcon="@drawable/ic_baseline_keyboard_hide_24"  app:keyWidth="20%p" />-->
+<!--        <Key app:codes="-12" app:keyIcon="@drawable/ic_baseline_insert_emoticon_24" app:keyWidth="20%p"/>-->
+<!--        <Key app:codes="-13" app:keyIcon="@drawable/ic_baseline_mic_24" app:keyWidth="20%p" />-->
+<!--        <Key app:codes="-14" app:keyIcon="@drawable/ic_baseline_color_lens_24" app:keyWidth="20%p"/>-->
+<!--        <Key app:codes="-15" app:keyIcon="@drawable/ic_baseline_settings_24" app:keyEdgeFlags="right" app:keyWidth="20%p"/>-->
+<!--    </Row>-->
 
     <Row>
         <Key app:codes="0x0661" app:keyLabel="١" app:keyEdgeFlags="left" />

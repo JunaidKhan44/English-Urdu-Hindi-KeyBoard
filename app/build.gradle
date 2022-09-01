@@ -6,11 +6,11 @@ plugins {
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.example.create_keyboard1"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -60,6 +60,10 @@ dependencies {
 
     //one signal
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
+
+
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+
 
 
 
