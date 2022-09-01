@@ -3,7 +3,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -27,22 +26,15 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
 import com.example.create_keyboard1.R;
 
-import java.security.Key;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.GROUPSNAME_SHARED_PREF1;
-import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.POSITION_AD1;
-import static com.example.create_keyboard1.Adapter.KeyThemeAdapter.SHARED_PREF_NAME1;
-import static com.example.create_keyboard1.Otherclasses.SimpleIME.ic;
 
 /**
  * A view that renders a virtual {@link Keyboard}. It handles rendering of keys and
@@ -682,6 +674,8 @@ public class KeyboardView extends View implements View.OnClickListener {
                     case 113:
                         canvas.drawText("1",
                                 key.x + (key.width - keyXAxis), key.y + keyYAxis, paint);
+
+
                         break;
                     //wW
                     case 87:
